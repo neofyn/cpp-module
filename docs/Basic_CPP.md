@@ -1,0 +1,230 @@
+# CPP Basics
+
+## 1. Introduction
+
+### 1.1 Statements and Program Structures
+- A computer **program** is a sequence of instructions. A **statement** is a type of instructions for performing some action.
+- Statement is the **smallest unit** of computation in C++ and end (mostly) in a semicolon.
+- **Functions** is a collection of statements that get executed sequentially.
+- Every C++ program must have a special function named `main`.
+- The name of a function is called its **identifier**.
+
+```c++
+#include <iostream>
+
+int main()
+{
+    std::cout << "Hello world!";
+    return 0;
+}
+```
+- The `#include` line is called **preprocessor directive** to indicate that we use the contents of `iostream` library, in this case the `std::cout`.
+- `std::cout << "Hello world!";` reads as "`cout` send `Hello world` to the output stream." 
+  - `stdout:cout` is an output stream.
+  - `<<` is called **insertion operator/stream insertion** and inserts data into the stream.
+  - `Hello world!` is what you're inserting.
+
+### 1.2 Comments
+- `//` is used for single-line comments.
+- `/* ... */` is used for multi-line comments.
+
+### 1.3 Objects and Varibles
+- **Data** is any information that can be moved, processed, or stored by a computer.
+- A single piece of data is called a **value**.
+- Values that are placed directly into the source code are called **literals**.
+```c++
+#include <iostream>
+
+int main()
+{
+    std::cout << 5; // print the literal number `5`
+    return 0;
+}
+```
+- In C++, direct memory access is dicouraged. Instead, we access memory indirectly through objects.
+- An **object** is a region of storage (typically RAM or a CPU register) that can hold a value. Objects also have associated **properties**.
+- An object with a name is called a **variable**.
+```c++
+int x; // define a variable named x (of type int)
+```
+- At **runtime** (when the program is loaded into memory and run), each object is given an actual storage location (such as RAM or a CPU register). The process of reserving storage for an object's use is called **allocation**.
+- There are multiple ways to define variables:
+```c++
+int a;
+int b;
+// is effectivelly the same as:
+int a, b;
+
+int a, int b; // wrong (compiler error)
+
+int a; double b; // correct (but not recommended)
+// correct and recommended
+int a;
+double b;
+```
+
+### 1.4 Variable Assignment and Initialization
+- The process of giving a variable a value is called **assignment** (using the **assignment operator** `=`);
+```c++
+int width; // definition
+width = 5; // assignment
+width = 7; // another assignment
+```
+- These two steps can be combinded. The process of specifying an initial value for an object is called **initialization**, and the syntax used to initialize an object is called an **initializer**.
+```c++
+int width {5}; // define variable width and initialize with initial value 5
+// {5} is the initializer
+// 5 is the initial value
+```
+- There are 5 common forms of initialization in C++:
+```c++
+// Default-initialization (no initializer)
+int a;
+
+// Traditional initialization forms:
+// copy-initialization
+int b = 5;
+// direct-initialization (used in explicit casting)
+int c (6);
+
+// Modern initialization forms (preferred?):
+// direct-list-initialization (provide a way to  initialize objects with a list of values)
+int d {7}; 
+// value-initialization (empty braces)
+int e {};
+```
+- List-initialization disallows **narrowing conversion**, means that you can only list-initialize a variable using a value that the variable can safely hold.
+```c++
+int a1 {4.5}; // compiler error: list-init does not allow narrowing conversion
+
+int a2 = 4.5; // compiles: copy-init to value 4
+int a3 (4.5); // compiles: direct-init to value 4
+```
+- This restriction on narrowing conversions only applies to the list-initialization, **not** to any subsequent assignments to the variable:
+```c++
+int a1 {4.5}; // compiler error: list-init does not allow narrowing conversion
+
+a1 = 4.5; // okay: copy-assignment allows narrowing conversion of 4.5 to 4
+```
+
+- **Zero-initialization** happends when a variable is initialized using an empty set of braces, thus the value-initialization will implicitly initialize the variable to zero (or whatever value is closest to zero for a given type).
+```c++
+int width {}; //value-initialization/zero-initialization to value 0
+```
+- For class types, value-initialization (or default-initialization) may instead initialize the object to predefined default values, which may be non-zero.
+
+### 1.5 `iostream`: `cout`, `cin` and `endl`
+
+- `std::out` can both print text,numbers, and values of variables
+```c++
+#include <iostream>
+
+int main()
+{
+    std::cout = "Hello world!"; // print out "Hello world!"
+    std::cout = 4; // print out 4
+
+    int x {5};
+    std::out << 5; // print out value of x (5)
+
+    return 0;
+}
+```
+- To print more than one thing on the same line, the insertion operator (`<<`) can be used multiple times in a single statement.
+```c++
+#include <iostream>
+
+int main()
+{
+    std::cout << "Hello" << " world!";
+
+    int x {5};
+    std:cout << "x is equal to: " << x;
+
+    return 0;
+}
+```
+- One way to output a newline is to output `std::endl`.
+```c++
+#include <iostream>
+
+int main()
+{
+    std::cout << "Hi!" << std::endl;
+    std::cout << "My name is Alex." << std::endl;
+
+    return 0;
+}
+```
+- `std::out` is buffered, which means if your program crashes, aborts, or is paused (e.g. for debugging) before the buffer is flushed, any output still waiting in the buffere will not be displayed.
+- To output a newline without flushing the output buffer, we use `\n` to move the cursor to the next line without causing a flush (perform better).
+```c++
+#include <iostream>
+
+int main()
+{
+    int x {5};
+    std::cout << "x is equal to: " << x << '\n';
+    std::cout << "Yep."<< "\n";
+    std::cout << "And that's all, folks!\n"
+
+    return 0;
+}
+```
+- `std::cin` reads input form keyboard. We typically use dthe extraction operator `>>` to put the input data in a variable.
+```c++
+#include <iostream>
+
+int main()
+{
+    std::cout << "Enter a number: ";
+
+    int x {}; // define a var x to hold user input and value-initialize it
+    std::cin >> x; // get number from keyboard and store it in variable x
+    std::cout << "You've entered " << x << '\n';
+
+    return 0;
+}
+```
+```c++
+#include <iostream>
+
+int main()
+{
+    std::cout << "Enter two numbers sepaated by a space: ";
+
+    int x {};
+    int y {};
+
+    std::cin >> x >> y; // get two numbers and store in variable x and y respectively
+
+    std::cout << "You've entered " << x << " and " << y << '\n';
+
+    return 0;
+}
+```
+- `std::in` is buffered because it allows us to separate the entering of input from the extract of input. We can enter input once and then perform multiple extraction requests on it.
+- Any non-extracted characters (including newlines) remain available for the next extraction attempt, e.g.:
+```c++
+int x {};
+std:cin >> x;
+```
+- If the user types `5a`and enter, `5a\n` will be added to the buffer. `5` will be extracted, converted to an integer, and assigned to variable `x`. `a\n`will be left in the input buffer for the next extraction.
+- If the user types `b` and enter, `b\n` will be added to the buffer. Because `b` is not a valid integer, no characters can be extracted, so this is an extraction failure. Variable `x` would be set to `0`, and future extractions will fail until the input stream is cleared.
+- if `std::cin` is not in a good state due to a prior failed extraction, nothing happens here. The valuea of varible `x` is not altered.
+
+### 1.6 Expressions
+- An **expression** is an non-empty sequence of literals, variables, operators, and function calls that calculates a value.
+- The process of executing an expression is called **evaluation**, and the resulting value produced is called the **return value**.
+- **Side effect** is an observable effect of an operator or function beyond producing a return value.
+  - Since assignment has the observable effect of canging the value of an object, this is considered a side effect.
+  - Some operators (e.g. the assignment operator) are primarily used for their side effects (rather than the return value produced).
+```c++
+x = 5 // has the side effect of assigning 5 to x, evalates to x
+x = 2 + 3 // has side effect of assigning 5 to x, evaluates to x
+std:cout << x // has side effect of printing value of x to console, evaluates to std::cout
+```
+
+## 2. Functions
+- The most basic syntax to define a **user-defined** function:
+- 
