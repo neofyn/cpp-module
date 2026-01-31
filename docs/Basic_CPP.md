@@ -227,4 +227,76 @@ std:cout << x // has side effect of printing value of x to console, evaluates to
 
 ## 2. Functions
 - The most basic syntax to define a **user-defined** function:
-- 
+```c++
+returnType functionName() // function header
+{
+    //function body
+}
+```
+```c++
+#include <iostream>
+
+void doPrint()
+{
+    std::cout << "In doprint()\n";
+}
+
+int main()
+{
+    std::cout << "Starting main()\n";
+    doPrint();
+    std::cout << "Ending main()\n";
+
+    return 0;
+}
+```
+- C++ does **not support nested function**.
+- In C++, there are two special requiremtns for `main()`:
+  - `main()`is required to return an `int`.
+  - Explicit function calls to `main()` are disallowed.
+- The C++ standard only defines the meaning of 3 status codes: `0` or `EXIT_SUCCESS` and `EXIT_FAILURE`.
+- `main()` will implicitly return `0` if no return statement is provided.
+- C++ code compiles sequentially (top to bottom). So it can only reference a function that has been declared beforehand and known to be in the same file.
+- Alternatively, we can use **forward declaration**.
+```c++
+#include <iostream>
+
+int add(int x, int y); // forward declaration of add() (using a function declaration)
+
+int main()
+{
+    std::cout << "The sum of 3 and 4 is: " << add(3, 4) << '\n'; // this works because we forward declared add() above
+    return 0;
+}
+
+int add(int x, int y)
+{
+    return x + y;
+}
+```
+### The One Definition Rule (ODR)
+1. Within a *file*, each function, variale, type, or template in a given scope can only have one definition. Definitions occuring in different scopes (e.g. local variable defined inside different functions, or functions defined inside different namespaces) do not violate this rule.
+Violation will cause compiler to issue a **redefinition error**.
+2. Within a *program*, each function or variable in a given scope can only have one definition. This rule exists because programs can have more than one file.
+Violation will cause compiler to issue a **redefinition error**.
+3. Types, templates, inline functions, and inline variables are allowed to have duplicate definitions in different files, so long each definition is identical.
+Violation will cause **undefined behaviour**.
+
+Example of a violation of part 1:
+```c++
+int add(int x, int y)
+{
+     return x + y;
+}
+
+int add(int x, int y) // violation of ODR, we've already defined function add(int, int)
+{
+     return x + y;
+}
+
+int main()
+{
+    int x{};
+    int x{ 5 }; // violation of ODR, we've already defined x
+}
+```
