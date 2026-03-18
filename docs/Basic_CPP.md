@@ -19,7 +19,7 @@ int main()
 }
 ```
 - The `#include` line is called **preprocessor directive** to indicate that we use the contents of `iostream` library, in this case the `std::cout`.
-- `std::cout << "Hello world!";` reads as "`cout` send `Hello world` to the output stream." 
+- `std::cout << "Hello world!";` reads as "`cout` send `Hello world` to the output stream."
   - `stdout:cout` is an output stream.
   - `<<` is called **insertion operator/stream insertion** and inserts data into the stream.
   - `Hello world!` is what you're inserting.
@@ -89,7 +89,7 @@ int c (6);
 
 // Modern initialization forms (preferred?):
 // direct-list-initialization (provide a way to  initialize objects with a list of values)
-int d {7}; 
+int d {7};
 // value-initialization (empty braces)
 int e {};
 ```
@@ -298,5 +298,70 @@ int main()
 {
     int x{};
     int x{ 5 }; // violation of ODR, we've already defined x
+}
+```
+
+
+# Core Concepts for Exercise 00
+
+To complete this exercise, it is essential to understand how C++ handles input/output, namespaces, and basic string manipulation.
+
+## 1. Namespaces and `std::`
+In C, functions like `printf` are global. In C++, most standard library functions are grouped into `std` (standard) namespace to prevent naming collisions.
+- **Accesing members:** Use the scope resolution operator `::` toaccess items in a namespace (e.g., `std:cout`).
+- **Note:** The exercise instruction explicitly **forbid** using the `using namepace <name>` keyword. You must always use the explicit `std::` prefix.
+
+### 1.1 What is a Namespace?
+In C, all global functions and variables share a single global scope. If you have two libraries that both define a function named `print()`, you will face a **naming collision**, and your program will fail to link.
+
+A **namespace** in C++ acts like a "container" for identifiers (functions, classes, variables). It creates a separate scope region that allows you to use the same name in different context without conflict.
+
+### 1.2 The `std` Namespace
+To prevent your code from accidentally conflicting with standard library functions, C++ moves almost all its standard functionality into a namespace called `std` (short for "standard").
+- Instead of just `cout`, the full name is `std::cout`.
+- The `::` is the **scope resolution operator**, which tells the compiler exactly which namespace to look in.
+
+### 1.3 Accessing Namespaces
+There are three ways to access items in a namespace, one of them is explicitely forbidden to use within the scope of this project:
+| Method                 | Syntax Example          | Exercise Status |
+| ---------------------- | ----------------------- | --------------- |
+| Explicit Qualification | `std::cout << "Hello";` | REQUIRED        |
+| Using-Declaration      | `using std::cout;`      | Check Rules     |****
+| Using-Directive        | `using namespace std;`  | FORBIDDEN       |
+
+
+### 1.4 Why `using namespace std;` is Forbidden
+The `using namespace std;` directive "dumps" every single name from the `std` namespace into your global scope. This completely defeats the purpose of having namespaces.
+- **Insidious Bugs:** If you update a library and it introduces a new function with the same name as one of yours, your program might suddenly stop compiling or, worse, change its behaviour silently.
+- **Standard Practice:** In professional C++ development, you are expected to be explicit about where your functions come from.
+
+### 1.5 Practical Example for ex00
+For the "Megaphone" exercise, everytime you use a standard function or object, you must prefix it:
+```C++
+#include <iostream> // Header for I/O
+#incldue <cctype>   // Header for character manipulation (like toupper)
+
+int main(int argc, char **argv) {
+    // Correct way: Explicitly use the std:: namespace
+    std::cout << "MESSAGE";
+
+    // Using a function from the standard library (C-style but in std)
+    char c = std::toupper('a');
+    return (0);
+}
+```
+
+By following this "explicit qualification" rule, you ensure your code is compliant.
+
+## 2. Input/Output Streams (`iostream`)
+C++ uses "streams" for I/O instead of `printf` and `scanf`. You must include the `<iostream>` header.
+- `std::cout`: Used for standard output.
+- `<<` **(Insertion Operator):** Used to sed data to `std::cout`.
+- `std:endl` vs `\n`: Both add a newline. `std:endl` also "flushes" the buffer (forces output immediately), which is slower than just using the `\n` character.
+- **Example**:
+```C++
+#include <iostream>
+int main() {
+ std::cout << "Hello " <<
 }
 ```
