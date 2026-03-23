@@ -365,3 +365,43 @@ int main() {
  std::cout << "Hello " <<
 }
 ```
+A stream is an abstraction that represent a flow of data between source (e.g., your keyboard) and a destination (e.g., terminal screem or a file).
+Coming from C, the biggget shift is moving away from format specifier (like `%d` or `%s`) and toward **type-safe operators**.
+
+### 2.1 The Core Objects
+To use streams, you must include the header `#include <iostream>`. Theis provides access to several standard stream objects:
+- `std:cout`: (Character Output) The standard output stream, ususally directed to the terminal. It is the C++ equivalent of `stdout`.
+- `std::cin`: (Character Input) The standard input stream, usualy reading from the keyboard. Equivalent to `stdin`.
+- `std::cerr`: (Character Error) The standard error stream, used for error messages. Equivalent to `stderr`.
+
+### 2.2 The Insertion Operator (`<<`)
+To sedn data to `std::out`, you use the **insertion operator** (`<<`). Think of the arrow as pointing in the direction the data is flowing.
+```c++
+std::cout << "Hello World";
+```
+In this example the string "Hello World" is being "inserted" into the output stream.
+
+Key advantages over `printf`:
+- **Type Safety**: No need to tell C++ that you are printing an integer or a string. The compiler knows the type and handles it automatically.
+- **Chaining**: You can chain multiple items together in one statement.
+```c++
+int age = 25;
+std::cout << "I am " << age " years old." << std::endl;
+```
+## 3. Manipulators: `std:endl` vs. `\n`
+
+There are two main ways to output a newline at the end:
+1. `std::endl`: This inserts a newline character (`\n`) **and** flushes the stream buffer.
+2. `\n`: This simply inserts a newline character.
+
+#### Why does flushing matter?
+Operating systems often "buffer" output (wait until they have a bunch of text before actually drawing it to the screen) to save processing power. `std::endl` forces the computer to show the text *right* now.
+
+### Important Note on Buffer
+Because `std::cout` is buffered, if you print characters one by one in a loop:
+```c++
+for (int i = 0; argv[1][i]; i++) {
+    std::cout << (char)std::toupper(argv[1][i]);
+}
+```
+The terminal won't necessarily print them one by one. It will wait until the buffer is full or until it hits `std::endl` at the very end of the program to diplay the whole string at once.
