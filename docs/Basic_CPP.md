@@ -405,3 +405,65 @@ for (int i = 0; argv[1][i]; i++) {
 }
 ```
 The terminal won't necessarily print them one by one. It will wait until the buffer is full or until it hits `std::endl` at the very end of the program to diplay the whole string at once.
+
+
+
+
+
+
+
+
+
+
+
+# CPP 02
+
+## Exercise 00
+Three important topics:
+1. **Fixed-Point Arithmetic**
+2. **Classes**
+3. **Orthodox Canonical Form**
+
+### 1. What is Fixed-Point? Accuracy vs. Precision
+**Accuracy** refers to how close a measurement is to the true value, whereas **precision** has to do with how much information you have about a quantity, how uniquely you have it pinned down.
+- Integer arithmetic has a complete accuracy, while lack in precision since it's unable to keep track of the fractional part (information lost).
+- Floating point numbers are the exact opossite. They have ggod precision, since they never deliberately discard information representing your numbers, as long as you had enough bits. But it lack accuracy, it's *impossible* to match a specific number bit for bit.
+- Floating point numbers are inherently different from integers in that not every fraction can be represented exactly in binary, whereas any integer can. No finite decimal digit representation (e.g. 0.333333) can ever be equal to 1/3.
+
+`Fixed-point numbers` are a middle ground. You take a regular integer and decide that a speific number of bits will *always* represent the fractional part.
+- **Example**: Imagine an 80-bit number where we decide the last 2 bits are fractional. The binary `000010.01` would represent `2 + 0.25 = 2.25`. The "point" never moves
+
+In Exercise 00, you are required to use **8 bits** for the fractional part. This means your raw integer value is effectively the real value multiplied by 2^8^ (256).
+
+### 2. The Structure: What is a C++ Class?
+
+In C, you have `structs` that hold data. In C++, a `Class` holds both **data** (attributes) and **functions** (member functions) that act on that data.
+
+**Access Specifiers**
+- `private`: Only the class itself can touch these. This is called **Encapsulation**. Your exercise requires the raw value and the fractional bits constant to be private.
+- `public`: These can be accessed from outside the class (like in `main.cpp`).
+
+### 3. The Requirement: Orthodox Canonical Form
+
+The subject states that from now on, all classes must follow the **Orthodox Canonical Form**. This is a C++98 standard practice to ensure your objects behave predictably when copied or destroyed. You must implmenet these four specific members:
+
+1. **Default Constructor**
+Initialize the object when it's created without arguments.
+```c++
+Fixed(); // Requirements: Initialize value to 0
+```
+2. **Copy Constructor**
+Initialize a *new* object as a copy of an existing object.
+```c++
+Fixed(const Fixed &other);
+```
+
+3. **Copy Assignment Operator**
+Copies the values from one **already existing** object to another existing object using the `=` sign.
+```c++
+Fixed &operator=(const Fixed &other));
+```
+4. **Destructor**
+Cleans up the object when it goes out of scope.
+~Fixed();
+
