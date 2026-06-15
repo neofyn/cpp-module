@@ -413,4 +413,181 @@ No. of Object destroyed: 1
 
 #### 8. Arrays
 
-Arrays are used to store multiple values in a single variable
+Arrays are used to store multiple values in a single variable, instead of declaring separate variables for each value.
+
+To declare an array, define the variable type, specify the name of the array followed by square brackets and specify the number of elements it should store. To insert values to it, we can use an array literal - place the values in a comma-separated list, inside curly braces:
+
+```cpp
+string cars[4];
+string cars[4] = {"Volvo", "BMW", "Ford", "Mazda"};
+int myNum[3] = {10, 20, 30};
+```
+
+You access an array element by referring to the index number inside square brackets []. To change the value of a specific element, refer to the index number:
+```cpp
+string cars[4] = {"Volvo", "BMW", "Ford", "Mazda"};
+cout << cars[0]; // Outputs Volvo
+
+cars[0] = "Opel";
+cout << cars[0]; // Now outputs Opel instead of Volvo
+```
+
+#### 9. `std:string`
+Strings are used for storing text/characters. A `string` variable contains a collection of characters surrounded by double quotes (`""`). To use strings, you must include an additional header file in the source code, the `<string>` library:
+```cpp
+// Include the string library
+#include <string>
+
+// Create a string variable
+string greeting = "Hello";
+
+// Print the string
+cout << greeting;
+```
+A string in C++ is actually an **object**, which contain functions that can perform certain operations on strings. For example, you can also concatenate strings with the `append()` function:
+```cpp
+string firstName = "John ";
+string lastName = "Doe";
+string fullName = firstName.append(lastName);
+cout << fullName;
+```
+
+To get the length of a string, use the `length()` function:
+```cpp
+string txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+cout << "The length of the txt string is: " << txt.length();
+```
+> **Note**: Tip: You might see some C++ programs that use the size() function to get the length of a string. This is just an alias of length(). It is completely up to you if you want to use length() or size().
+
+#### 10. `std::getline`
+`std::getline` reads a whole line from input.
+```cpp
+std::string input;
+std::getline(std::cin, input);
+```
+
+Our command loop will also use `std::getline`:
+```cpp
+while (true)
+{
+	std::cout << "Enter command: ";
+	if (!std::getline(std::cin, command))
+		break;
+}
+```
+This also handles Ctrl-D cleanly. If input ends, the program exits instead of looping forever.
+
+> **Warning**: mixing `std::cin >> input` and `std::getline` can cause bugs, because `std::cin >> `leaves the newline in the input buffer. For this project, the simplest clean solution is to use std:getline everywhere.
+
+
+#### 11. `std::setw`
+std::setw is used to control input/output width.
+
+The subject requires the search table columns to be 10 characters wide, right-aligned, and separated by |.
+
+To use `std::setw`, include:
+```cpp
+#include <iomanip>
+```
+
+Example:
+```cpp
+std::cout << std::setw(10) << "Bob" << std::endl;
+
+// Output: "       Bob"
+```
+
+For the phonebook table:
+```cpp
+std::cout << std::setw(10) << index << "|";
+std::cout << std::setw(10) << firstName << "|";
+std::cout << std::setw(10) << lastName << "|";
+std::cout << std::setw(10) << nickname << std::endl;
+```
+Important: `std::setw(10)` only affects the next printed value.
+
+This:
+```cpp
+std::cout << std::setw(10) << firstName << lastName;
+```
+will only applies width 10 fo `firstName`, not to `lastName`. So it needs to be repeated:
+```cpp
+std::cout << std::setw(10) << firstName;
+std::cout << std::setw(10) << lastName;
+```
+
+Also, right allignment can be made explicit:
+```cpp
+std::cout << std::right << std::setw(10) << firstName;
+```
+
+#### 12. Encapsulation
+**Encapsulation** means hiding the internal data of a class and only allowing controlled access through public functions, commonly called getter/setter.
+
+For example, we could later make setFirstName reject empty names:
+```cpp
+bool Contact::setFirstName(std::string firstName)
+{
+	if (firstName.empty())
+		return false;
+	_firstName = firstName;
+	return true;
+}
+
+contact.setFirstName(firstName);
+```
+Now the class controls how its data changes.
+
+So instead of designing everything in `main.cpp`, we split responsibilities:
+```cpp
+main.cpp    = command loop
+PhoneBook   = add/search logic and contact array
+Contact     = one contact's data
+```
+
+
+### Address Operator (`&`)
+
+### 1. Two common meanings of `&`
+
+#### Meaning 1: address-of operator
+
+When `&` is used in front of an existing variable in normal code, it means `the memory address of the variable`. This is the same idea as we know from C.
+```cpp
+std::string name = "Alice"
+std::cout << &name << std::endl // will print the address of `name`
+```
+
+#### Meaning 2: reference type
+
+When `&` appears in a type declaration, it means `the var with said type is a reference to a variable`.
+```cpp
+std::string& ref = name; // ref is a referecne to name
+```
+`ref` is not a copy. It is another name for the same variable `name`. So if we change `ref`, it will also change `name`.sss
+```cpp
+ref = "Bob";
+std::cout << name << std::endl
+```
+
+#### Function parameter without vs. with `&`
+Suppose we have this:
+```cpp
+void printName(std::string name)
+{
+	std::cout << name << std::endl;
+}
+```
+
+
+### Program Flow
+```cpp
+start program
+create empty PhoneBook
+repeat:
+	read command
+	if ADD: add contact
+	if SEARCH: search contact
+	if EXIT: stop program
+	otherwise: ignore input
+```
