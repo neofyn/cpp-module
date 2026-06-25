@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 11:49:58 by fyudris           #+#    #+#             */
-/*   Updated: 2026/06/15 11:53:05 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/06/25 11:12:28 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 #include <iostream>
 #include <string>
 
+/**
+ * @brief Entry point of the phonebook program.
+ *
+ * The program creates one PhoneBook object and repeatedly asks the user for a
+ * command.
+ *
+ * Valid commands:
+ * - ADD
+ * - SEARCH
+ * - EXIT
+ *
+ * Any other command is ignored.
+ *
+ * @return 0 when the program exits successfully.
+ */
 int	main(void)
 {
 	PhoneBook	phoneBook;
@@ -29,7 +44,7 @@ int	main(void)
 		else if (command == "SEARCH")
 			phoneBook.search();
 		else if (command == "EXIT")
-			break;
+			break ;
 	}
 	return (0);
 }
