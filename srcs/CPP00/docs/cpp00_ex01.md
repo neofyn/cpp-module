@@ -300,22 +300,22 @@ using namespace std;
 class Test {
 public:
 
-    // User-Defined Constructor
-    Test() {
-        cout << "Constructor Called"
-             << endl;
-    }
+// User-Defined Constructor
+Test() {
+	cout << "Constructor Called"
+			<< endl;
+}
 
-    // User-Defined Destructor
-    ~Test() {
-        cout << "Destructor Called"
-             << endl;
-    }
+// User-Defined Destructor
+~Test() {
+	cout << "Destructor Called"
+			<< endl;
+}
 };
 int main() {
-    Test t;
+	Test t;
 
-    return 0;
+	return 0;
 }
 
 // Output
@@ -344,28 +344,28 @@ using namespace std;
 class MyClass {
 private:
 
-    // Pointer to dynamically allocated memory
-    int* data;
+	// Pointer to dynamically allocated memory
+	int* data;
 
 public:
-    MyClass(int value) {
-        data = new int;
-        *data = value;
-        cout << *data << endl;
-    }
+	MyClass(int value) {
+		data = new int;
+		*data = value;
+		cout << *data << endl;
+	}
 
-    // User-defined destructor: Free the dynamically allocated memory
-    ~MyClass() {
-        // Deallocate the dynamically 
-        // allocated memory
-        delete data;  
-        cout << "Destructor: Memory deallocated";
-    }
+	// User-defined destructor: Free the dynamically allocated memory
+	~MyClass() {
+		// Deallocate the dynamically 
+		// allocated memory
+		delete data;  
+		cout << "Destructor: Memory deallocated";
+	}
 };
 
 int main() {
-    MyClass obj1(10);
-    return 0;
+	MyClass obj1(10);
+	return 0;
 }
 ```
 > **Note**: When the object is destroyed, the destructor releases the dynamically allocated resources, which in this case is the pointer.
@@ -382,21 +382,21 @@ using namespace std;
 int count = 0;
 class Test {
 public:
-    Test(){
-        // Number of times constructor is called
-        count++;
-        cout << "No. of Object created: " << count << endl;
-    }
-    ~Test() {
-        // It will print count in decending order
-        cout << "No. of Object destroyed: " << count << endl;
-        count--;
-    }
+	Test(){
+		// Number of times constructor is called
+		count++;
+		cout << "No. of Object created: " << count << endl;
+	}
+	~Test() {
+		// It will print count in decending order
+		cout << "No. of Object destroyed: " << count << endl;
+		count--;
+	}
 };
 
 int main() {
-    Test t, t1, t2, t3;
-    return 0;
+	Test t, t1, t2, t3;
+	return 0;
 }
 ```
 Output:
