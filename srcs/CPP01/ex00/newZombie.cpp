@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 15:50:40 by fyudris           #+#    #+#             */
-/*   Updated: 2026/06/27 15:53:43 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/03 17:22:56 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,10 @@
  *
  * @return A pointer to the created zombie.
  */
-Zombie	*newZombie(std::string name)
+Zombie *newZombie(std::string name)
 {
 	Zombie *zombie;
-	
+
 	zombie = new Zombie(name);
 	return (zombie);
-}
-/**
- * @brief Creates a temporary stack Zombie and makes it announce itself.
- *
- * The zombie is destroyed automatically when this function ends.
- *
- * @param name The name assigned to the zombie.
- */
-void	randomChump(std::string name)
-{
-	Zombie zombie(name);
-	zombie.announce();
 }

@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 15:54:00 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/03 17:25:47 by fyudris          ###   ########.fr       */
+/*   Created: 2026/06/03 18:20:16 by fyudris           #+#    #+#             */
+/*   Updated: 2026/07/03 18:32:07 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef HUMANA_HPP
+# define HUMANA_HPP
 
-/**
- * @brief Tests heap and stack zombie lifetimes.
- */
-int main(void)
+# include <string>
+# include "Weapon.hpp"
+
+class HumanA
 {
-	Zombie *heapZombie;
+private:
+	std::string _name;
+	Weapon &_weapon;
 
-	heapZombie = newZombie("HeapZombie");
-	heapZombie->announce();
+public:
+	HumanA(const std::string &name, Weapon &weapon);
 
-	randomChump("StackZombie");
+	void attack(void) const;
+};
 
-	delete heapZombie;
-	return (0);
-}
+#endif

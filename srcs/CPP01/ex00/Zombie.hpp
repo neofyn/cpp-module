@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 11:48:19 by fyudris           #+#    #+#             */
-/*   Updated: 2026/06/27 11:50:54 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/03 17:22:42 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 
 class Zombie
 {
-	private:
-		std::string _name;
+private:
+	std::string _name;
 
-	public:
-		Zombie(std::string name);
-		~Zombie(void);
+public:
+	Zombie(std::string name);
+	~Zombie(void);
 
-		void	announce(void) const;
+	void announce(void) const;
 };
 
-Zombie	*newZombie(std::string name);
-void	randomChump(std::string name);
+Zombie *newZombie(std::string name);
+void randomChump(std::string name);
 
 #endif

@@ -5,25 +5,35 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 15:54:00 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/03 17:25:47 by fyudris          ###   ########.fr       */
+/*   Created: 2026/06/03 17:26:10 by fyudris           #+#    #+#             */
+/*   Updated: 2026/07/03 17:45:37 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
 /**
- * @brief Tests heap and stack zombie lifetimes.
+ * @brief Tests zombieHorde().
+ *
+ * Creates a horde, announces every zombie, then destroys the full array with
+ * delete[].
  */
 int main(void)
 {
-	Zombie *heapZombie;
+	Zombie	*horde;
+	int		hordeSize;
+	int		i;
 
-	heapZombie = newZombie("HeapZombie");
-	heapZombie->announce();
-
-	randomChump("StackZombie");
-
-	delete heapZombie;
+	hordeSize = 5;
+	horde = zombieHorde(hordeSize, "HordeZombie");
+	if (horde == 0)
+		return (1);
+	i = 0;
+	while (i < hordeSize)
+	{
+		horde[i].announce();
+		i++;
+	}
+	delete[] horde;
 	return (0);
 }

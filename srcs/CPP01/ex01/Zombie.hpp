@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 15:54:00 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/03 17:25:47 by fyudris          ###   ########.fr       */
+/*   Created: 2026/06/03 17:26:26 by fyudris           #+#    #+#             */
+/*   Updated: 2026/07/03 17:36:14 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#ifndef ZOMBIE_HPP
+# define ZOMBIE_HPP
 
-/**
- * @brief Tests heap and stack zombie lifetimes.
- */
-int main(void)
+# include <iostream>
+# include <string>
+
+class Zombie
 {
-	Zombie *heapZombie;
+private:
+	std::string _name;
 
-	heapZombie = newZombie("HeapZombie");
-	heapZombie->announce();
+public:
+	Zombie(void);
+	~Zombie(void);
 
-	randomChump("StackZombie");
+	void setName(const std::string &name);
+	void announce(void) const;
+};
 
-	delete heapZombie;
-	return (0);
-}
+Zombie *zombieHorde(int N, std::string name);
+
+#endif

@@ -5,25 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 15:54:00 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/03 17:25:47 by fyudris          ###   ########.fr       */
+/*   Created: 2026/06/03 18:20:33 by fyudris           #+#    #+#             */
+/*   Updated: 2026/07/03 18:39:59 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Weapon.hpp"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 
 /**
- * @brief Tests heap and stack zombie lifetimes.
+ * @brief Tests HumanA and HumanB weapon behavior.
+ *
+ * HumanA receives a weapon in the constructor.
+ * HumanB receives a weapon later through setWeapon().
  */
 int main(void)
 {
-	Zombie *heapZombie;
+	{
+		Weapon club("crude spiked club");
 
-	heapZombie = newZombie("HeapZombie");
-	heapZombie->announce();
+		HumanA bob("Bob", club);
+		bob.attack();
 
-	randomChump("StackZombie");
+		club.setType("some other type of club");
+		bob.attack();
+	}
+	{
+		Weapon club("crude spiked club");
 
-	delete heapZombie;
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+
+		club.setType("some other type of club");
+		jim.attack();
+	}
+	
 	return (0);
 }

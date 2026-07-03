@@ -1,6 +1,7 @@
 # Self defined
 .DS_Store
 .vscode
+/examples
 
 # Prerequisites
 *.d
