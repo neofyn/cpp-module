@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/14 15:02:53 by fyudris           #+#    #+#             */
-/*   Updated: 2026/06/25 11:09:04 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/03 14:25:14 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,6 @@ class Contact
 public:
 	/**
 	 * @brief Default constructor.
-	 *
-	 * Called automatically when a Contact object is created.
-	 * In this exercise, the constructor does not need to manually initialize
-	 * the std::string attributes because std::string automatically starts 
-	 * empty.
 	 */
 	Contact(void);
 

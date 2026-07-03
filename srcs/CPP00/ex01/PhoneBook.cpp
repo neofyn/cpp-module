@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 11:05:02 by fyudris           #+#    #+#             */
-/*   Updated: 2026/06/25 13:08:10 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/03 14:39:25 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
  * - _contactCount to 0, because the phonebook starts empty
  * - _nextIndex to 0, because the first contact should be stored at index 0
  *
- * The array _contacts already contains 8 Contact objects. No dynamic allocation
- * is used.
+ * The array _contacts already contains 8 Contact objects. No dynamic 
+ * allocation (using `new`) is used.
  */
 PhoneBook::PhoneBook(void) : _contactCount(0), _nextIndex(0)
 {
@@ -214,9 +214,9 @@ void	PhoneBook::add(void)
 	_contacts[_nextIndex].setDarkestSecret(darkestSecret);
 	std::cout << "Contact saved at index " << _nextIndex << "." << std::endl;
 	_nextIndex++;
-	if (_nextIndex == 8)
+	if (_nextIndex == 3)
 		_nextIndex = 0;
-	if (_contactCount < 8)
+	if (_contactCount < 3)
 		_contactCount++;
 }
 
