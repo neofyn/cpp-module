@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:04 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:07:20 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/04 19:13:30 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 #include <iostream>
 
 /**
- * @brief Default constructor.
+ * @brief Default constructor implementation.
  *
- * Initializes a ClapTrap with the default name "default".
- * The required starting values are:
- * - 10 hit points
- * - 10 energy points
- * - 0 attack damage
+ * Initializes a ClapTrap with the default name and ex00 default stats.
  */
 ClapTrap::ClapTrap(void)
 	: _name("default"), _hitPoints(10), _energyPoints(10), _attackDamage(0)
@@ -30,15 +26,11 @@ ClapTrap::ClapTrap(void)
 }
 
 /**
- * @brief Name constructor.
+ * @brief Name constructor implementation.
  *
- * Initializes a ClapTrap with a custom name.
- * The required starting values are:
- * - 10 hit points
- * - 10 energy points
- * - 0 attack damage
+ * Initializes a ClapTrap with a custom name and ex00 default stats.
  *
- * @param name The name assigned to the ClapTrap.
+ * @param name Name assigned to the ClapTrap.
  */
 ClapTrap::ClapTrap(std::string const &name)
 	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
@@ -48,11 +40,11 @@ ClapTrap::ClapTrap(std::string const &name)
 }
 
 /**
- * @brief Copy constructor.
+ * @brief Copy constructor implementation.
  *
- * Creates a new ClapTrap by copying all attributes from another ClapTrap.
+ * Copies all state from another ClapTrap.
  *
- * @param other The ClapTrap object to copy from.
+ * @param other ClapTrap object copied from.
  */
 ClapTrap::ClapTrap(ClapTrap const &other)
 	: _name(other._name),
@@ -65,10 +57,9 @@ ClapTrap::ClapTrap(ClapTrap const &other)
 }
 
 /**
- * @brief Destructor.
+ * @brief Destructor implementation.
  *
- * Called automatically when a ClapTrap object is destroyed.
- * It prints a message so construction/destruction order can be observed.
+ * Prints a message so the destruction order can be observed.
  */
 ClapTrap::~ClapTrap(void)
 {
@@ -77,13 +68,13 @@ ClapTrap::~ClapTrap(void)
 }
 
 /**
- * @brief Copy assignment operator.
+ * @brief Copy assignment operator implementation.
  *
- * Copies all attributes from another already-existing ClapTrap object into
- * the current object.
+ * Copies all attributes from another ClapTrap, while protecting against
+ * self-assignment.
  *
- * @param other The ClapTrap object to copy from.
- * @return A reference to the current object.
+ * @param other ClapTrap object assigned from.
+ * @return Reference to the current object.
  */
 ClapTrap &ClapTrap::operator=(ClapTrap const &other)
 {
@@ -100,12 +91,12 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &other)
 }
 
 /**
- * @brief Attacks a target and spends one energy point.
+ * @brief Makes the ClapTrap attack a target.
  *
- * A ClapTrap can only attack if it has at least one hit point and one energy
- * point. The target is only a string in ex00, not another ClapTrap object.
+ * The attack only happens if the ClapTrap has hit points and energy points.
+ * Attacking spends exactly one energy point.
  *
- * @param target The name of the target printed in the attack message.
+ * @param target Name of the target.
  */
 void ClapTrap::attack(std::string const &target)
 {
@@ -130,12 +121,11 @@ void ClapTrap::attack(std::string const &target)
 }
 
 /**
- * @brief Reduces the ClapTrap's hit points.
+ * @brief Applies damage to the ClapTrap.
  *
- * Damage is passive, so it does not cost energy. The hit points are clamped
- * at zero to avoid unsigned integer underflow.
+ * Damage does not cost energy. Hit points are reduced but never below 0.
  *
- * @param amount The amount of damage received.
+ * @param amount Amount of damage received.
  */
 void ClapTrap::takeDamage(unsigned int amount)
 {
@@ -159,13 +149,12 @@ void ClapTrap::takeDamage(unsigned int amount)
 }
 
 /**
- * @brief Repairs the ClapTrap and spends one energy point.
+ * @brief Repairs the ClapTrap.
  *
- * A ClapTrap can only repair itself if it has at least one hit point and one
- * energy point. There is no maximum hit point limit specified in the subject,
- * so the repaired hit points are allowed to go above 10.
+ * Repairing is only possible if the ClapTrap has hit points and energy points.
+ * Repairing spends exactly one energy point.
  *
- * @param amount The amount of hit points restored.
+ * @param amount Amount of hit points restored.
  */
 void ClapTrap::beRepaired(unsigned int amount)
 {
