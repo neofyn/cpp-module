@@ -118,13 +118,15 @@
 	- [🔸 Returning Fixed\&](#-returning-fixed)
 	- [🔸 Operators are Functions](#-operators-are-functions)
 - [🛣️ CPP02 ex01 - Towards a more useful fixed-point number class](#️-cpp02-ex01---towards-a-more-useful-fixed-point-number-class)
-	- [🔸 Operator\<\<](#-operator)
+	- [🔸 Goal](#-goal-4)
 	- [🔸 Why we scale numbers](#-why-we-scale-numbers)
+	- [🔸 Operator\<\<](#-operator)
 	- [🔸 Increasing Precision](#-increasing-precision)
-	- [🔸 Int Constructor](#-int-constructor)
-	- [🔸 Converting from int](#-converting-from-int)
+	- [🔸 `int` Constructor](#-int-constructor)
+	- [🔸 Converting from `int`](#-converting-from-int)
 	- [🔸 Converting from float](#-converting-from-float)
 	- [🔸 Converting back to float](#-converting-back-to-float)
+	- [🔸Simple mental model:](#simple-mental-model)
 	- [🔸 Operator\<\< Fixed Function](#-operator-fixed-function)
 	- [🔸 Known operator\<\< Functions](#-known-operator-functions)
 	- [🔸 IEEE-754 Floating Point](#-ieee-754-floating-point)
@@ -1764,13 +1766,9 @@ a.operator=(b);
 
 
 # 🛣️ CPP02 ex01 - Towards a more useful fixed-point number class
-## 🔸 Operator<<
-We use `<<` instead of `*` because:
-- It reflects bit-level fixed-point math (bit manipulation, bit shifting) instead of arithmetic
-- It matches the fractional bits concept (We understand that it's related to `_fractionalBits`)
-- It's common in low-level programming
-- Historically it was faster than `*` (no performance gain today because modern compilers optimize this automatically)
-- It scales automatically with _fractionalBits
+## 🔸 Goal
+In ex01, the subject asks  to add constructors from `int` and `float`, conversion functions `toFloat()` and `toInt()`, and an overload for `operator<<`. `roundf` is authorized for this exercise.
+
 
 ## 🔸 Why we scale numbers
 `_rawBits` is just an int, but we want to represent decimal numbers.
@@ -1794,10 +1792,47 @@ so:
 ```
 _rawBits = 1344
 ```
+In C++:
+```cpp
+1 << 8
+```
+means:
+```cpp
+265
+```
+
+So when you construct from an integer:
+```cpp
+Fixed b(10)
+```
+we actually store:
+```cpp
+10 * 256 = 2560
+
+_rawBits = 2560;
+```
+
+Then when converting back to float:
+```cpp
+2560 / 256 = 10.0
+```
+
+## 🔸 Operator<<
+Because shifting left by 8 is the same as multiplying by 256.
+```cpp
+10 << 8 = 2560
+```
+We use `<<` instead of `*`/multiplication because:
+- It reflects bit-level fixed-point math (bit manipulation, bit shifting) instead of arithmetic
+- It matches the fractional bits concept (We understand that it's related to `_fractionalBits`)
+- It's common in low-level programming
+- Historically it was faster than `*` (no performance gain today because modern compilers optimize this automatically)
+- It scales automatically with `_fractionalBits`
+
 ## 🔸 Increasing Precision
 With `_fractionalBits` is set to 8, we have
 ```
-[ 24 bits integer ][ 8 bits fraction ]
+[ 24 bits integer ][ 8 bits fraction ] = 32 bits
 ```
 When we change our `_fractionalBits` to a higher number, like 10:
 ```
@@ -1806,18 +1841,20 @@ When we change our `_fractionalBits` to a higher number, like 10:
 ```
 Our smallest step becomes smaller and more precise, but our maximum integer/range becomes smaller and we can't express as big of a number.
 
-## 🔸 Int Constructor
+
+
+## 🔸 `int` Constructor
 This runs when you construct `Fixed` from an `int`.
 ```cpp
 Fixed a(10);
 ```
-Here, 10 is an integer, but `Fixed` stores values in _rawBits using fixed-point representation.
+Here, 10 is an integer, but `Fixed` stores values in `_rawBits` using fixed-point representation.
 The internal value of `_fractionalBits` is 8.
-Therefore, 2^8 = 256.
+Therefore, `2^8 = 256`.
 So we take the real value (10) and multiply it by 256.
 This is the equivalent of bitshifting 8 spaces to the left.
 
-## 🔸 Converting from int
+## 🔸 Converting from `int`
 When we construct an int, we shift the into to make room for fractional bits
 Conversion Example using the `int 5`
 
@@ -1833,7 +1870,7 @@ _rawBits = value << _fractionalBits;
 ```
 it means:
 ```
-value * (2^fractionalBits)
+value * (2 ^ fractionalBits)
 ```
 
 Stored `_rawBits` example:
@@ -1845,42 +1882,68 @@ Stored `_rawBits` example:
 |10|2560|
 
 ## 🔸 Converting from float
-When converting from a `float`, we still need to bit shift. However, bit shifting only works on integral types like `int`, `long`, `unsigned int`
-The compiler won't allow to shift a float because it's stored in a different way in memory, using "IEEE 754 format.
+When converting from a `float`, we still need the same scaling idea as bit shifting, but we cannot shift the `float` directly. So we calculate the shift value separately, then multiply.
+ However, bit shifting (`<<`, `>>`) only works on integers types like `int`, `long`, `unsigned int`.
+The compiler won't allow to shift a float because it's stored in a different way in memory, using "IEEE 754" format.
 Syntax:
+```
 sign | exponent | mantissa
-
+```
 Example:
+```
 5.25
 0 | 10000001 | 01010000000000000000000
-
+```
 We cannot shift this.
 Therefore we first compute:
 ```cpp
-1 << _fractionalBits
+1 << _fractionalBits // fine cause 1 is int
 ```
 Now the expression becomes
 ```
 value * 256
 ```
-which is valid because
-float * int = float.
+which is valid because `float * int = float`.
 
 ## 🔸 Converting back to float
 The float to stored value `_rawBits`:
 ```
-stored_value = real_value * (2^fractionalBits)
+stored_value = real_value * (2 ^ fractionalBits)
 ```
 Stored value to real value:
 ```
-stored_value = real_value / (2^fractionalBits)
+stored_value = real_value / (2 ^ fractionalBits)
 ```
-When converting, we cast to float or else we lose the decimal place, because _rawBits is an int.
+When converting, we cast to float, or else we lose the decimal place, because `_rawBits` is an int.
 ```cpp
 return static_cast<float>(this->_rawBits) / (1 << _fractionalBits);
 ```
 We only need to cast one side because the compiler automatically converts the other operand to match.
 If we cast after the division has already happened with `_rawBits`, we lose the decimal place.
+
+## 🔸Simple mental model:
+
+`int` value can use bit shift:
+```cpp
+value << 8
+```
+because it is an integer.
+
+`float` value cannot use bit shift:
+```cpp
+value << 8 // impossible
+```
+so we do:
+```cpp
+value * (1 << 8)
+```
+which becomes:
+```cpp
+value * 256
+```
+That is the float-safe version of scaling.
+
+
 
 ## 🔸 Operator<< Fixed Function
 Defines how a `Fixed` object is printed to an output
@@ -1917,7 +1980,7 @@ This example:
 ```cpp
 std::cout << 5 << " hello " << 3.14 << std::endl;
 ```
-uses many different overloads of operator<< for different types.
+uses many different overloads of `operator<<` for different types.
 These are all functions that look like this:
 ```cpp
 std::ostream& operator<<(std::ostream& out, TYPE value);
@@ -1930,8 +1993,8 @@ https://www.cprogramming.com/tutorial/floating_point/understanding_floating_poin
 https://www.cprogramming.com/tutorial/floating_point/understanding_floating_point_representation.html
 https://www.cprogramming.com/tutorial/floating_point/understanding_floating_point_printing.html
 
-Computers store numbers using bits, and for ints this is simple.
-But floating point numbers (numbers with decimals) are much harder
+Computers store numbers using bits, and for `int`s this is simple.
+But `float`ing point numbers (numbers with decimals) are much harder
 They store these using a format called IEEE-754 floating point.
 
 #### Scientific Notation
@@ -1959,6 +2022,7 @@ So every float is stored as 3 parts.
 A 32-bit float looks like this:
 ```
 seeeeeeeemmmmmmmmmmmmmmmmmmmmmmm
+1   8              23
 ```
 Example:
 ```
@@ -2003,7 +2067,7 @@ Instead of storing `3.5`, we store an integer scaled by a constant.
 3.5 -> 896
 3.5 * 256 = 896
 ```
-In our project, _rawBits stores the scaled integer value.
+In our project, `_rawBits` stores the scaled integer value.
 The scaling factor is `(1 << _fractionalBits)`.
 If `_fractionalBits = 8`:
 ```
