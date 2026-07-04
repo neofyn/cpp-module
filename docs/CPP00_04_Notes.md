@@ -187,7 +187,7 @@ Compile with `-Wall -Wextra -Werror -std=c++98`.
 ## 🔸Goal
 
 The program recives command-line arguments and prints them in uppercase. If no argument is given, it prints:
-`* LOUD AND UNBEARABLE FEEDBACK NOISE *` 
+`* LOUD AND UNBEARABLE FEEDBACK NOISE *`
 
 ## 🔸 Important Edge Case
 Do not blindly add spaces between arguments. Quoted shell arguments can already contain spaces.
@@ -210,8 +210,8 @@ In C++, how the arguments are passed is decided by the function, not the caller.
 static void make_uppercase(std::string &s)
 ```
 
-### 2. Output in C++: `std::`cout`
-In C, we would use `printf("Hello \");`.  In C++, we use:
+### 2. Output in C++: `std::cout`
+In C, we would use `printf("Hello \n");`.  In C++, we use:
 ```cpp
 std::cout << "Hello" << std:endl;
 ```
@@ -230,8 +230,8 @@ Hello world
 ```
 `std::endl` prints a newline and flushes the stream, whereas `std::cout << "\n"` just inserts a new line. You can also use `"\n"`, but `std::endl` is common and readable here.
 
-> **Note:** 
-> `std::cout << "\n"` looks performance wise better, but  `std::cout << std::endl` is better in performance sensitive code, as it doesn't occupy any memory and also if flushing of stream is required. 
+> **Note:**
+> `std::cout << "\n"` looks performance wise better, but  `std::cout << std::endl` is better in performance sensitive code, as it doesn't occupy any memory and also if flushing of stream is required.
 
 ### 3. Uppercasing characters & casting safety
 
@@ -250,7 +250,7 @@ s[i] = static_cast<unsigned char>(std::toupper(c));
 ```
 
 ### 4. Notes on I/O and Strings
-- `std::cout` is an object that keeps **state** (buffer, format flags, locale, error bits). 
+- `std::cout` is an object that keeps **state** (buffer, format flags, locale, error bits).
 - s`td::endl` prints `\n` and **flushes**.
 - When calling `std::toupper`, cast `chars` to `unsigned char` first to avoid UB with negative values.
 - Convert C strings to `std::string` for easier manipulation; pass by reference when you need in-place edits.
@@ -277,12 +277,11 @@ s[i] = static_cast<unsigned char>(std::toupper(c));
 
 5. return 0
 ```
----
 # 📖 CPP00 ex01 - My Awesome PhoneBook
 
 ## 🔸 Goal
 Implement two classes:
-1. `PhoneBook` has an array of contacts, stores max. 8 contacts (adding the 9th contact will replace the oldest one by one). **Note:** dynamic allocation is forbidden. 
+1. `PhoneBook` has an array of contacts, stores max. 8 contacts (adding the 9th contact will replace the oldest one by one). **Note:** dynamic allocation is forbidden.
 1. `Contact` stands for a phonebook contact
 
 The phonebook must be instantiated as an instance of the `PhoneBook`class. Same thing for the contacts. Each one of them must be instantiated as an instance of the `Contact` class.
@@ -495,7 +494,7 @@ class MyClass
 {
  	public:
 		MyClass() {	// Constructor
-			cout << "Hello World!"; // prints "Hello World" when the object is created 
+			cout << "Hello World!"; // prints "Hello World" when the object is created
 		}
 };
 
@@ -616,9 +615,9 @@ public:
 
 	// User-defined destructor: Free the dynamically allocated memory
 	~MyClass() {
-		// Deallocate the dynamically 
+		// Deallocate the dynamically
 		// allocated memory
-		delete data;  
+		delete data;
 		std::cout << "Destructor: Memory deallocated";
 	}
 };
@@ -1477,5 +1476,5 @@ In comparison to a normal function pointer:
 ```cpp
 void (*function)(void);
 ```
-### Notable Resources🔸 
+### Notable Resources🔸
 - https://cplusplus.com/reference/cctype/
