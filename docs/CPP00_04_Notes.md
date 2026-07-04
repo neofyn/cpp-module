@@ -54,7 +54,7 @@
 		- [1. Two common meanings of `&`](#1-two-common-meanings-of-)
 			- [Meaning 1: address-of operator](#meaning-1-address-of-operator)
 			- [Meaning 2: reference type](#meaning-2-reference-type)
-	- [🔹Circular Buffer](#circular-buffer)
+	- [🔸 Circular Buffer](#-circular-buffer)
 	- [`std::istringstream stream(input)`](#stdistringstream-streaminput)
 		- [Program Flow](#program-flow)
 - [🧟 CPP01 ex00 - BraiiiiiiinnnzzzZ](#-cpp01-ex00---braiiiiiiinnnzzzz)
@@ -103,6 +103,86 @@
 	- [🔸 Goal](#-goal-3)
 	- [🔸Member Function Pointers](#member-function-pointers)
 	- [🔸This](#this)
+- [🏛️ CPP02 ex00 - My First Class in Orthodoc Canonical Form](#️-cpp02-ex00---my-first-class-in-orthodoc-canonical-form)
+	- [🔸 Orthodoc Canonical Form](#-orthodoc-canonical-form)
+			- [Default Constructor](#default-constructor)
+			- [Copy Constructor](#copy-constructor)
+			- [Copy Assignment operator](#copy-assignment-operator)
+			- [Deconstructor](#deconstructor)
+	- [🔸 Operator Overloading](#-operator-overloading)
+	- [🔸 Fixed-point Numbers](#-fixed-point-numbers)
+			- [Advantages and Disadvantages of Fixed-point Numbers](#advantages-and-disadvantages-of-fixed-point-numbers)
+	- [🔸 Static Class Members](#-static-class-members)
+	- [🔸 Object Lifecycle](#-object-lifecycle)
+	- [🔸 Maning Conventions](#-maning-conventions)
+	- [🔸 Returning Fixed\&](#-returning-fixed)
+	- [🔸 Operators are Functions](#-operators-are-functions)
+- [🛣️ CPP02 ex01 - Towards a more useful fixed-point number class](#️-cpp02-ex01---towards-a-more-useful-fixed-point-number-class)
+	- [🔸 Goal](#-goal-4)
+	- [🔸 Why we scale numbers](#-why-we-scale-numbers)
+	- [🔸 Operator\<\<](#-operator)
+	- [🔸 Increasing Precision](#-increasing-precision)
+	- [🔸 `int` Constructor](#-int-constructor)
+	- [🔸 Converting from `int`](#-converting-from-int)
+	- [🔸 Converting from float](#-converting-from-float)
+	- [🔸 Converting back to float](#-converting-back-to-float)
+	- [🔸Simple mental model:](#simple-mental-model)
+	- [🔸 Operator\<\< Fixed Function](#-operator-fixed-function)
+	- [🔸 Known operator\<\< Functions](#-known-operator-functions)
+	- [🔸 IEEE-754 Floating Point](#-ieee-754-floating-point)
+			- [Scientific Notation](#scientific-notation)
+			- [How a float is stored in memory](#how-a-float-is-stored-in-memory)
+			- [How a float vs double is stored in memory](#how-a-float-vs-double-is-stored-in-memory)
+			- [Floating Point numbers are inexact](#floating-point-numbers-are-inexact)
+			- [Precision limits](#precision-limits)
+			- [Integer scaled by a constant](#integer-scaled-by-a-constant)
+			- [Printing converts binary into decimal](#printing-converts-binary-into-decimal)
+			- [Alogrithms](#alogrithms)
+- [😎 CPP02 ex02 - Now we're talking](#-cpp02-ex02---now-were-talking)
+	- [🔸 Core arithmetic idea](#-core-arithmetic-idea)
+	- [🔸 Multiplication](#-multiplication)
+			- [Why Shift Right](#why-shift-right)
+	- [🔸 Division](#-division)
+			- [Why shift left](#why-shift-left)
+	- [🔸 Pre-increment (++i)](#-pre-increment-i)
+	- [🔸 Post-increment (i++)](#-post-increment-i)
+- [CPP03 ex00 - Aaaaand... OPEN!](#cpp03-ex00---aaaaand-open)
+	- [🔸 ClapTrap State](#-claptrap-state)
+	- [🔸 ClapTrap Attack](#-claptrap-attack)
+	- [🔸 ClapTrap Take Damage](#-claptrap-take-damage)
+	- [🔸 ClapTrap Repair](#-claptrap-repair)
+	- [🔸 Objects are State Machines](#-objects-are-state-machines)
+- [CPP03 ex01 - Serena, my love!](#cpp03-ex01---serena-my-love)
+	- [🔸 Inheritance](#-inheritance)
+	- [🔸 Protected vs Private](#-protected-vs-private)
+	- [🔸 Altered Default State](#-altered-default-state)
+	- [🔸 Constructor Chaining](#-constructor-chaining)
+	- [🔸 Method Specialization / Overriding Functions](#-method-specialization--overriding-functions)
+	- [🔸 Adding Functionality](#-adding-functionality)
+	- [🔸 Copy and Assignment in Inheritance](#-copy-and-assignment-in-inheritance)
+	- [🔸 Destruction Order](#-destruction-order)
+- [CPP03 ex02 - Repetitive work](#cpp03-ex02---repetitive-work)
+	- [🔸 Reusable Base Class](#-reusable-base-class)
+- [CPP04 ex00 - Polymorphism](#cpp04-ex00---polymorphism)
+	- [🔸 Subtype Polymorphism](#-subtype-polymorphism)
+	- [🔸 Virtual Functions](#-virtual-functions)
+	- [🔸 Overriding](#-overriding)
+	- [🔸 Virtual Destructor](#-virtual-destructor)
+	- [🔸 Static Binding vs Dynamic Binding](#-static-binding-vs-dynamic-binding)
+	- [🔸 WrongAnimal / WrongCat](#-wronganimal--wrongcat)
+	- [🔸 Copy constructor behavior / redundancy](#-copy-constructor-behavior--redundancy)
+- [CPP04 ex01 - I don’t want to set the world on fire](#cpp04-ex01---i-dont-want-to-set-the-world-on-fire)
+	- [🔸 Deep Copy](#-deep-copy)
+			- [Copy assignment operator example:](#copy-assignment-operator-example)
+- [CPP04 ex02 - Abstract class](#cpp04-ex02---abstract-class)
+	- [🔸 Abstract Classes](#-abstract-classes)
+	- [🔸 Pure virtual functions](#-pure-virtual-functions)
+	- [🔸 Virtual vs Pure Virtual](#-virtual-vs-pure-virtual)
+	- [🔸 Abstraction](#-abstraction)
+	- [🔸 Polymorphism in Abstract classes](#-polymorphism-in-abstract-classes)
+	- [🔸 Concrete class vs abstract class](#-concrete-class-vs-abstract-class)
+			- [Concrete class](#concrete-class)
+			- [Abstract class](#abstract-class)
 		- [Notable Resources🔸](#notable-resources)
 
 
@@ -857,7 +937,7 @@ ref = "Bob";
 std::cout << name << std::endl
 ```
 
-## 🔹Circular Buffer
+## 🔸 Circular Buffer
 ```cpp
 oldestIndex = (oldestIndex + 1) % 8;
 ```
@@ -1328,6 +1408,25 @@ This tries to change the reference. This is not allowed.
 | Reseating reference | Making it point to a different object (not allowed) |
 | Modifying object    | Changing the object's internal data (allowed)       |
 
+
+## Pointer or Reference for Weapon?
+In which case do you think it would be best to use a pointer to
+Weapon? And a reference to Weapon? Why? Think about it before
+starting this exercise.
+```
+It is best to use a reference to Weapon when the Human must always have a valid weapon from the moment it is created.
+
+It is best to use a pointer to Weapon when the Human may exist without a weapon, or when the weapon can be assigned later.
+
+In this exercise, HumanA should use a reference because HumanA receives a Weapon in the constructor and is always armed. A reference must be initialized immediately and cannot be null, so it expresses this rule clearly.
+
+HumanB should use a pointer because HumanB is created without a Weapon and receives one later through setWeapon(). A pointer can start as NULL/0 and later point to an existing Weapon object.
+
+Both HumanA and HumanB should not store a copy of the Weapon, because when the weapon type changes with setType(), the attack message should use the updated weapon type.
+```
+
+
+
 # ✏️ CPP01 ex04 - Sed is for losers
 
 ## 🔸Goal
@@ -1476,5 +1575,958 @@ In comparison to a normal function pointer:
 ```cpp
 void (*function)(void);
 ```
+<<<<<<< HEAD
 ### Notable Resources🔸
 - https://cplusplus.com/reference/cctype/
+=======
+
+---
+
+# 🏛️ CPP02 ex00 - My First Class in Orthodoc Canonical Form
+## 🔸 Orthodoc Canonical Form
+These will be used from now on. Every class must include:
+1. Default constructor
+2. Copy constructor
+3. Copy assignment operator
+4. Deconstructor
+
+For `Fixed`, that means:
+```cpp
+Fixed();							// default constructor
+Fixed(Fixed const &other);			// copy constructor
+Fixed &operator=(Fixed const &other);	// copy assignment operator
+~Fixed();						// destructor
+```
+
+#### Default Constructor
+Creates an object with no parameters. Implementation:
+```cpp
+Fixed::Fixed(){}
+```
+Example:
+```cpp
+Fixed a;
+```
+
+#### Copy Constructor
+Creates a new object from another object. Example:
+```cpp
+Fixed a;
+Fixed b(a);
+```
+This calls:
+```cpp
+Fixed::Fixed(const Fixed& other)
+```
+
+#### Copy Assignment operator
+This assigns values between existing objects. Example:
+```cpp
+Fixed a;
+Fixed b;
+
+b = a; // replacing current b's value with a's value
+```
+This calls:
+```cpp
+Fixed& Fixed::operator=(const Fixed& other)
+```
+`operator=` is the copy assignment operator.
+For built in types like int, C++ knows what to do:
+```cpp
+int a = 5;
+int b = 10;
+a = b;
+```
+However when you make your own classes, the compiler needs instructions
+```cpp
+Fixed& operator=(const Fixed& other);
+```
+Example:
+```cpp
+Fixed a;
+Fixed b;
+b = a; // operator= called
+```
+C++ also translates b = a into
+```cpp
+b.operator(a);
+```
+
+#### Deconstructor
+Runs when an object is destroyed. Frees memory and cleans up resources.
+```cpp
+{
+	Fixed a
+} // Deconstructor called here
+```
+
+## 🔸 Operator Overloading
+This means giving special behavior to operators like `+`, `<<`, `>>`, `==` etc.
+If we create a class, then try to use an operator, it gives an error because the compiler doesn't know what operators are supposed to do with an newly declared class.
+
+## 🔸 Fixed-point Numbers
+A fixed-point number stores a decimal-like number inside an integer. For example, with **8 fractional bits**, the number is internally scaled by:
+```cpp
+2^8 = 256
+```
+Normally we use
+```
+int   -> 5
+float -> 5.25
+```
+Computers represent floats with approximation. But Fixed-point number stores decimals using integers.
+
+Example:
+If we use 8 fractional bits:
+```
+value = raw / 2^8
+
+raw = 256
+256 / 256 = 1.0
+```
+Therefore internally:
+```
+1.0 = 256
+2.0 = 512
+0.5 = 128
+```
+#### Advantages and Disadvantages of Fixed-point Numbers
+|Property |Fixed      |Float          |
+|---------|-----------|---------------|
+|Speed    |fast       |slower         |
+|Precision|predictable|rounding errors|
+|Range    |smaller    |large          |
+
+## 🔸 Static Class Members
+```cpp
+static const int fractionalBits = 8
+```
+- All objects share the same value.
+- Const means it cannot be modified.
+- Static means it's shared by the whole class. (There is only one copy for the class, not per object, and all objects refer to it in one place in memory.)
+
+## 🔸 Object Lifecycle
+```cpp
+Fixed a; // Default constructor
+Fixed b(a); // Copy constructor
+Fixed c; // Default constructor
+c = b; // Copy assignment operator
+```
+
+## 🔸 Maning Conventions
+| Thing | Style | Example |
+|-------|-------|---------|
+| Class | UpperCamelCase | Fixed |
+| Function | lowerCamelCase | getRawBits() |
+| Member variable | _lowerCamelCase | _rawBits |
+| Local variable | lowerCamelCase | rawValue |
+
+Note about using underscores:
+Do not use double underscores like `__rawBits`. This is reserved for the compiler.
+
+## 🔸 Returning Fixed&
+We return a reference to the object called Fixed.
+
+If we just return without the `&`, it would do this:
+1. Assignment runs.
+2. A new Fixed object is created. (We don't want this, it's extra work.)
+3. That object is returned.
+4. temporary object destroyed.
+
+So when the function returns a referenced to the object, we would pair it with:
+```cpp
+return *this
+```
+The function would then do this:
+1. Operator= runs
+2. object updated
+3. return reference to object
+
+This also enables assignment chaining:
+```cpp
+a = b = c;
+```
+```cpp
+b = c // (returns reference to b)
+a = b
+```
+
+## 🔸 Operators are Functions
+In C++ operators are functions.
+Syntax:
+```cpp
+returnType ClassName::functionName(parameters)
+Fixed& Fixed::operator=(const Fixed& other)
+```
+`Fixed&` - Return type
+`Fixed::` - Class name. Function belongs to Fixed class
+`operator=` - Function name.
+Other operator function names that can be used:
+```cpp
+operator=
+operator+
+operator-
+operator==
+operator<
+operator<<
+```
+When a compiler sees:
+```cpp
+a = b
+```
+It translates into something like:
+```
+a.operator=(b);
+```
+`(const Fixed& other)` - Parameter list
+`Fixed` - The argument type
+`&` - it's passed by reference
+`const` - The function promises not to modify other
+`other` - The parameter name
+
+
+
+# 🛣️ CPP02 ex01 - Towards a more useful fixed-point number class
+## 🔸 Goal
+In ex01, the subject asks  to add constructors from `int` and `float`, conversion functions `toFloat()` and `toInt()`, and an overload for `operator<<`. `roundf` is authorized for this exercise.
+
+
+## 🔸 Why we scale numbers
+`_rawBits` is just an int, but we want to represent decimal numbers.
+So we store numbers like this:
+```
+stored_value = real_value * 2^fractionalBits
+```
+Since:
+```
+2^8 = 256
+```
+we store:
+```
+real * 256
+```
+For example:
+```
+5.25 * 256 = 1344
+```
+so:
+```
+_rawBits = 1344
+```
+In C++:
+```cpp
+1 << 8
+```
+means:
+```cpp
+265
+```
+
+So when you construct from an integer:
+```cpp
+Fixed b(10)
+```
+we actually store:
+```cpp
+10 * 256 = 2560
+
+_rawBits = 2560;
+```
+
+Then when converting back to float:
+```cpp
+2560 / 256 = 10.0
+```
+
+## 🔸 Operator<<
+Because shifting left by 8 is the same as multiplying by 256.
+```cpp
+10 << 8 = 2560
+```
+We use `<<` instead of `*`/multiplication because:
+- It reflects bit-level fixed-point math (bit manipulation, bit shifting) instead of arithmetic
+- It matches the fractional bits concept (We understand that it's related to `_fractionalBits`)
+- It's common in low-level programming
+- Historically it was faster than `*` (no performance gain today because modern compilers optimize this automatically)
+- It scales automatically with `_fractionalBits`
+
+## 🔸 Increasing Precision
+With `_fractionalBits` is set to 8, we have
+```
+[ 24 bits integer ][ 8 bits fraction ] = 32 bits
+```
+When we change our `_fractionalBits` to a higher number, like 10:
+```
+[ 22 bits integer ][ 10 bits fraction ]
+2^10 = 1024
+```
+Our smallest step becomes smaller and more precise, but our maximum integer/range becomes smaller and we can't express as big of a number.
+
+
+
+## 🔸 `int` Constructor
+This runs when you construct `Fixed` from an `int`.
+```cpp
+Fixed a(10);
+```
+Here, 10 is an integer, but `Fixed` stores values in `_rawBits` using fixed-point representation.
+The internal value of `_fractionalBits` is 8.
+Therefore, `2^8 = 256`.
+So we take the real value (10) and multiply it by 256.
+This is the equivalent of bitshifting 8 spaces to the left.
+
+## 🔸 Converting from `int`
+When we construct an int, we shift the into to make room for fractional bits
+Conversion Example using the `int 5`
+
+|Step|Operation|Binary|Decimal|
+|----|---------|------|-------|
+|Original int|5|0000000000000101|5|
+|Shift left 8 bits|5 << 8|0000010100000000|1280|
+|Equivalent math|5 * 256|0000010100000000|1280|
+
+Therefore when we look at the code:
+```cpp
+_rawBits = value << _fractionalBits;
+```
+it means:
+```
+value * (2 ^ fractionalBits)
+```
+
+Stored `_rawBits` example:
+|Real number|Stored number in `_rawBits`|
+|-----------|---------------------------|
+|1|256|
+|2|512|
+|5|1280|
+|10|2560|
+
+## 🔸 Converting from float
+When converting from a `float`, we still need the same scaling idea as bit shifting, but we cannot shift the `float` directly. So we calculate the shift value separately, then multiply.
+ However, bit shifting (`<<`, `>>`) only works on integers types like `int`, `long`, `unsigned int`.
+The compiler won't allow to shift a float because it's stored in a different way in memory, using "IEEE 754" format.
+Syntax:
+```
+sign | exponent | mantissa
+```
+Example:
+```
+5.25
+0 | 10000001 | 01010000000000000000000
+```
+We cannot shift this.
+Therefore we first compute:
+```cpp
+1 << _fractionalBits // fine cause 1 is int
+```
+Now the expression becomes
+```
+value * 256
+```
+which is valid because `float * int = float`.
+
+## 🔸 Converting back to float
+The float to stored value `_rawBits`:
+```
+stored_value = real_value * (2 ^ fractionalBits)
+```
+Stored value to real value:
+```
+stored_value = real_value / (2 ^ fractionalBits)
+```
+When converting, we cast to float, or else we lose the decimal place, because `_rawBits` is an int.
+```cpp
+return static_cast<float>(this->_rawBits) / (1 << _fractionalBits);
+```
+We only need to cast one side because the compiler automatically converts the other operand to match.
+If we cast after the division has already happened with `_rawBits`, we lose the decimal place.
+
+## 🔸Simple mental model:
+
+`int` value can use bit shift:
+```cpp
+value << 8
+```
+because it is an integer.
+
+`float` value cannot use bit shift:
+```cpp
+value << 8 // impossible
+```
+so we do:
+```cpp
+value * (1 << 8)
+```
+which becomes:
+```cpp
+value * 256
+```
+That is the float-safe version of scaling.
+
+
+
+## 🔸 Operator<< Fixed Function
+Defines how a `Fixed` object is printed to an output
+stream by converting it to a float and sending it to the stream.
+
+It is a non-member operator because the left operand is `std::ostream`, not Fixed.
+
+C++ let's us use operator syntax. So this:
+```cpp
+operator<<(std::cout, a);
+```
+can be written more naturally as:
+```cpp
+std::cout << a;
+```
+Many classes implement their output operator like this:
+```cpp
+std::ostream& operator<<(std::ostream& out, const MyClass& obj)
+{
+    out << obj.someValue();
+    return out;
+}
+```
+They convert the object to something the stream already knows how to print, which is how an infinite recursion doesn't happen.
+After defining this, `std::cout` now understands one more type.
+For example:
+```cpp
+Fixed a(5.25f);
+std::cout << a;
+```
+
+## 🔸 Known operator<< Functions
+This example:
+```cpp
+std::cout << 5 << " hello " << 3.14 << std::endl;
+```
+uses many different overloads of `operator<<` for different types.
+These are all functions that look like this:
+```cpp
+std::ostream& operator<<(std::ostream& out, TYPE value);
+```
+Each overload handles a different `TYPE`
+
+## 🔸 IEEE-754 Floating Point
+References:
+https://www.cprogramming.com/tutorial/floating_point/understanding_floating_point.html
+https://www.cprogramming.com/tutorial/floating_point/understanding_floating_point_representation.html
+https://www.cprogramming.com/tutorial/floating_point/understanding_floating_point_printing.html
+
+Computers store numbers using bits, and for `int`s this is simple.
+But `float`ing point numbers (numbers with decimals) are much harder
+They store these using a format called IEEE-754 floating point.
+
+#### Scientific Notation
+Floating point numbers are Scientific notation in binary.
+A floating point number is stored like this:
+```
+value = sign * mantissa * 2^exponent
+```
+Decimal scientific notation example:
+```
+1234 = 1.234 * 10^3
+```
+Binary floating point does the same:
+```
+1.101 * 2^5
+```
+#### How a float is stored in memory
+So every float is stored as 3 parts.
+|Part     |Description           |
+|---------|----------------------|
+|Sign     |Positive or Negative  |
+|Exponent |How big the number is |
+|Mantissa |The precision digits  |
+
+A 32-bit float looks like this:
+```
+seeeeeeeemmmmmmmmmmmmmmmmmmmmmmm
+1   8              23
+```
+Example:
+```
+0 10000001 01100000000000000000000
+```
+|Part     |Description          |
+|---------|---------------------|
+|Sign     |0 = positive         |
+|Exponent |power of 2           |
+|Mantissa |Digits of the number |
+
+#### How a float vs double is stored in memory
+|type   |bits   |sign |exponent |mantissa |
+|-------|-------|-----|---------|---------|
+|float  |32-bit |1    |8        |23       |
+|double |64-bit |1    |11       |52       |
+
+#### Floating Point numbers are inexact
+Some decimal numbers can't be represented exactly in binary.
+`0.1` would have binary representation of `0.00011001100110011...`
+This causes rounding errors.
+
+If you add `0.1 + 0.2`, you would expect `3`, but you actuall get `0.30000000000000004`.
+Internally, the computer is adding approximations:
+```
+0.10000000149
++
+0.20000000298
+```
+This is not good for comparisons or for finances. Tiny rounding differences exist.
+
+#### Precision limits
+Floats have limited precision.
+
+A float has 32 bits and precision of ~7 decimal digits.
+a double has 64 bits and has precision of ~15 decimal digits.
+
+#### Integer scaled by a constant
+We use fixed point numbers to avoid floating point issues.
+Instead of storing `3.5`, we store an integer scaled by a constant.
+```
+3.5 -> 896
+3.5 * 256 = 896
+```
+In our project, `_rawBits` stores the scaled integer value.
+The scaling factor is `(1 << _fractionalBits)`.
+If `_fractionalBits = 8`:
+```
+(1 << 8) = 256
+```
+So internally, `_rawBits = value * 256`
+
+#### Printing converts binary into decimal
+1. Take the binary value stored in memory
+2. Convert it to decimal digits
+3. Print a decimal approximation
+This introduces rounding.
+So what gets printed may look like:
+`0.100000001` or `0.099999999` depending on the algorithm and precision.
+
+#### Alogrithms
+Algorithms must
+- round correctly
+- avoid printing unnecessary digits
+- be fast
+
+Modern languages use special algorithms like:
+- Dragon4
+- Grisu
+- Ryu
+
+# 😎 CPP02 ex02 - Now we're talking
+## 🔸 Core arithmetic idea
+```
+_rawBits = real_value * 256 (because 2^8 is 256)
+real_value = _rawBits / 256
+```
+
+## 🔸 Multiplication
+```cpp
+(static_cast<long>(rawA) * rawB) >> 8
+```
+1. Cast to long
+   	- Prevents overflow during multiplication.
+2. Multiply raw values
+```
+rawA * rawB
+```
+3. Shift right by 8
+	- Divide by 256 to fix scaling
+#### Why Shift Right
+```
+rawA = a * 256
+rawB = b * 256
+
+rawA * rawB = a * b * 256 * 256
+```
+But we want to store the result as `rawResult = (a * b) * 256`.
+```
+(rawA * rawB) / 256
+```
+which is
+```
+(rawA * rawB) >> 8
+```
+
+## 🔸 Division
+```cpp
+(static_cast<long>(rawA) << 8) /rawB
+```
+1. Cast to long
+	- Prevents overflow
+2. Shift left by 8
+	- increase precision (multiply by 256)
+3. Divide
+#### Why shift left
+```
+(rawA / rawB) = (a * 256) / (b * 256) = a / b
+```
+but we want to store the result `rawResult = (a / b) * 256`
+So we multiply first
+```
+(rawA * 256) / rawB
+```
+which is
+```
+(rawA << 8) / rawB
+```
+
+## 🔸 Pre-increment (++i)
+```cpp
+Fixed& Fixed::operator++() {
+    ++this->_rawBits;
+    return *this;
+}
+```
+1. Increment `_rawBits`
+2. Return the current object
+
+## 🔸 Post-increment (i++)
+```cpp
+Fixed Fixed::operator++(int) {
+    Fixed temp(*this);
+    ++this->_rawBits;
+    return temp;
+}
+```
+1. Copy the current value
+2. Increment `_rawBits`
+3. Return old value
+
+# CPP03 ex00 - Aaaaand... OPEN!
+Ex00 is about managing state and understanding object behavior
+## 🔸 ClapTrap State
+Each instance of ClapTrap has its own independent values.
+```cpp
+    std::string _name;
+    int         _hitPoints; // starts at 10
+    int         _energyPoints; // starts at 10
+    int         _attackDamage; // starts at 0
+```
+The constructor defines the starting state of the object.
+
+## 🔸 ClapTrap Attack
+This function checks if ClapTrap is alive and if it has energy, reduces `_energyPoints`, then prints an attack message.
+
+## 🔸 ClapTrap Take Damage
+This checks if ClapTrap is alive, reduces the `_hitPoints` to zero but no more negative than that, and prints a damage message.
+
+## 🔸 ClapTrap Repair
+This does the alive check and energy check, increases `_hitPoints` by the `amount`, reduces the `_energyPoints`, and then prints the repair message.
+
+## 🔸 Objects are State Machines
+Actions will modify the state of the object, and that affects future actions, like the use of hit points and energy points being adjusted on the object.
+
+# CPP03 ex01 - Serena, my love!
+This exercise is about inheritence, base class vs derived class, code reuse, and specialization.
+
+## 🔸 Inheritance
+```cpp
+class ScavTrap : public ClapTrap
+```
+A ScavTrap is a ClapTrap, but with extra behavior.
+It inherits from ClapTrap:
+```cpp
+_name
+_hitPoints
+_energyPoints
+_attackDamage
+takeDamage()
+beRepaired()
+```
+
+Inheritance is reuse and specialization. Same core structure but with new stats, behavior, and extra abilities.
+
+## 🔸 Protected vs Private
+To allow inheritance, we've changed `private` member functions into `protected` member functions in the .hpp files.
+```cpp
+protected:
+    std::string _name;
+    unsigned int _hitPoints;
+    unsigned int _energyPoints;
+    unsigned int _attackDamage;
+```
+Private is not accessible in child classes, but protected is.
+## 🔸 Altered Default State
+ScavTrap slters its default state, having more hp, energy, and higher damage. it "redefines ClapTrap's identity".
+
+## 🔸 Constructor Chaining
+```cpp
+ScavTrap(std::string name) : ClapTrap(name)
+```
+1. ClapTrap constructor runs
+2. ScavTrap constructor runs
+
+## 🔸 Method Specialization / Overriding Functions
+We override functions like `attack()`, and give it a new message.
+This is called "method specialization"
+
+## 🔸 Adding Functionality
+We gave ScavTrap a special function called `guardGate()` that exists only here and not in the normal ClapTraps.
+
+## 🔸 Copy and Assignment in Inheritance
+```cpp
+ScavTrap(const ScavTrap& other) : ClapTrap(other)
+
+ClapTrap::operator=(other);
+```
+We reuse base class logic to prevent duplicate code and ensure correct copying of inherited members.
+
+## 🔸 Destruction Order
+Whenever a ScavTrap is destroyed, the ScavTrap destructor is called first, and then the ClapTrap destructor. The derivative always gets created last and destroyed first. (The reverse order of construction.)
+
+# CPP03 ex02 - Repetitive work
+## 🔸 Reusable Base Class
+By creating FragTrap as a derivative of ClapTrap, we show that multiple different classes can inherit from the same base class.
+We can:
+- Reuse behavior (`attack`, `takeDamage`, `beRepaired`)
+- Override or extend selectively (`attack`, `guardGate`)
+- Have different stats
+
+# CPP04 ex00 - Polymorphism
+## 🔸 Subtype Polymorphism
+You can use a base class or reference, but the program calls the derived class version of a function.
+So if you do:
+```cpp
+Animal* a = new Dog();
+a->makeSound();
+```
+You want the Dog sound, not the generic animal sound.
+This will only happen if the function is declared `virtual` in the base class.
+
+Without `virtual`, C++ chooses the function based on the type of pointer (`Animal*`), not the real object (`Dog`).
+The code should print the sounds of Dog and Cat, not Animal.
+
+## 🔸 Virtual Functions
+in `Animal`, `makeSound()` is declared as:
+```cpp
+virtual void makeSound() const;
+```
+This tells C++, when calling through an `Animal*` or `Animal&`, use the real object's version.
+
+`Dog` and `Cat` override this function.
+
+## 🔸 Overriding
+Dog and Cat should each provide their own version of makeSound().
+It's the same function name, parameters, const.
+```cpp
+void makeSound() const;
+```
+If the signature is different, it may not override.
+Overridding functions must have the same return type, parameters, and same mark as `const`.
+
+## 🔸 Virtual Destructor
+If you do:
+```cpp
+const Animal* a = new Dog();
+delete a;
+```
+and the base destructor is not marked as `virtual`, deleting through the base pointer is wrong behavior.
+For polymorphic base classes, the destructor should be virtual:
+```cpp
+virtual ~Animal();
+```
+
+## 🔸 Static Binding vs Dynamic Binding
+without `virtual`:
+- binding happens at compile time
+- based on declare type
+- this is what `WrongAnimal` shows
+
+with `virtual`:
+- binding happens at runtime
+- based on real object type
+- this is what `Animal` shows
+
+## 🔸 WrongAnimal / WrongCat
+`WrongAnimal::makeSound()` is not virtual.
+Therefore:
+```cpp
+const WrongAnimal* w = new WrongCat();
+w->makeSound();
+```
+calls `WrongAnimal::makeSound()` instead of
+`WrongCat::makeSound()`
+
+because dispatch is based on the pointer type, not the real object.
+
+## 🔸 Copy constructor behavior / redundancy
+When writing:
+```cpp
+Cat::Cat(const Cat& other) : Animal(other) {
+}
+```
+you are already copying everything inside the object.
+The `Animal` copy constructor already does:
+```cpp
+Animal::Animal(const Animal& other) {
+	*this = other;
+}
+```
+
+So when you execute
+```cpp
+Cat a = b;
+```
+The base copy constructor works, and nothing else needs to be added.
+If you put `*this = other;` in the `Cat` copy constructor, it would copy the type twice. Once with `Animal(other)` and the other time with `*this = other` inside of the `Cat` copy constructor, which calls the operator overload `Cat::operator=(other)`
+
+You would only need to put in extra stuff if `Cat` had extra data or member variables.
+
+`Cat` does not introduce any new members beyond `Animal`, and `Animal(other)` already copies all the data (`type`), so not additional copying is needed.
+
+However, operator overloads need to be implemented because Cat is a different class.
+
+# CPP04 ex01 - I don’t want to set the world on fire
+## 🔸 Deep Copy
+Instead of copying the pointer itself, you copy the object it points to.
+A bad shallow copy:
+```cpp
+this->_brain = other._brain;
+```
+A good deep copy:
+```cpp
+this->brain = new Brain(*other._brain);
+```
+If you only did a shallow copy, both copies would point to the same brain. With a deep copy, you create a brain for each animal.
+
+#### Copy assignment operator example:
+```cpp
+Dog& Dog::operator=(const Dog& other)
+{
+    std::cout << "Dog copy assignment operator called" << std::endl;
+    if (this != &other) {
+        // this->type = other.type; This is a shallow copy and does not work
+        Animal::operator=(other); // Copy base part
+        delete this->brain // Clean old memory
+        this->brain = new Brain(*other.brain); // Deep copy, copy the actual content
+    }
+    return *this;
+}
+```
+We must:
+- copy the type
+- create a new brain
+- copy its contents
+
+# CPP04 ex02 - Abstract class
+In Previous exercises, `Animal` was a normal base class.
+But conceptually, that's weird. "Animal" is too generic. What exists is a Dog and Cat.
+Instead of saying "Animal has a default generic behavior", we will now say "Animal is only a base concept. We will never create one directly.
+This is what an abstract class is for.
+
+## 🔸 Abstract Classes
+An abstract class is a class that is meant to be a base class onl.
+It's used to:
+- define a common interface
+- force derived classes to provide their own implementation
+- prevent direct instantiation of the base class
+
+We will no longer be allowed to do:
+```cpp
+Animal a;
+Animal* a = new Animal();
+```
+But this will still be valid:
+```cpp
+Animal* a = new Dog();
+Animal* b = new Cat();
+```
+
+## 🔸 Pure virtual functions
+A pure virtual function is a virtual function with = 0.
+Example:
+```cpp
+virtual void makeSound() const = 0;
+```
+This means:
+- The function belongs to the base class interface
+- The base class doesn't provide a usable implementation for it
+- Every concrete derived class must override it
+
+THat's what makes it abstract.
+
+## 🔸 Virtual vs Pure Virtual
+Virtual:
+```cpp
+virtual void makeSound() const;
+```
+This means:
+- Derived classes can override it
+- base class can still have its own implementation
+- base class objects can still be created
+
+Pure virtual function:
+```cpp
+virtual void makeSound() const = 0;
+```
+This means:
+- Derived classes are expected to override it
+- The class becomes abstract
+- You can't instantiate the base class anymore
+
+If a derived class does not override `makeSound()`, that derived class also becomes abstract.
+
+## 🔸 Abstraction
+Without abstraction, this is possible:
+```cpp
+Animal a; // Not allowed in abstraction
+a.makeSound();
+```
+But we don't know what a generic animal sound would make.
+If we make it abstract, it forces you to create something real, like a `Dog` or `Cat`, where `makeSound()` will always make sense.
+
+An abstract idea acts like a contract.
+Animal says:
+- every derived animal must have a type
+- every derived animal must know how to makeSound()
+
+So `Animal defines what derived classes must do.
+`Dog` and `Cat` define how they do it.
+
+## 🔸 Polymorphism in Abstract classes
+Works the same still.
+```cpp
+Animal* a = new Dog();
+Animal* b = new Cat();
+
+a->makeSound();
+b->makeSound();
+```
+still calls the correct things
+```cpp
+Dog::makeSound()
+Cat::makeSound()
+```
+
+## 🔸 Concrete class vs abstract class
+#### Concrete class
+A class you can instantiate:
+```cpp
+Dog dog;
+Cat cat;
+```
+#### Abstract class
+A class you cannot instantiate:
+```cpp
+Animal animal; // Error
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Notable Resources🔸
+- https://cplusplus.com/reference/cctype/
+>>>>>>> c87750dcbebc2027423deebe69275f7650c6ec98
