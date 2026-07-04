@@ -2117,6 +2117,18 @@ Modern languages use special algorithms like:
 - Ryu
 
 # 😎 CPP02 ex02 - Now we're talking
+
+## 🔸 Goal
+Add comparison operators, arithmetic operators, pre/post increment and decrement, and static min/max overloads to your Fixed class. It also says the increment/decrement must change the value by the smallest representable epsilon, which with 8 fractional bits is `1 / 256 = 0.00390625.`
+
+## 🔸 Operator Overloading
+Operator overloading means you teach C++ how an (already existing) operator should behave with your own class. So we define:
+```c
+Fixed Fixed::operator+(Fixed const &rhs) const;
+// so a + b becomes
+a.operator+(b)
+```
+
 ## 🔸 Core arithmetic idea
 ```
 _rawBits = real_value * 256 (because 2^8 is 256)
@@ -2136,13 +2148,13 @@ rawA * rawB
 3. Shift right by 8
 	- Divide by 256 to fix scaling
 #### Why Shift Right
-```
+```c
 rawA = a * 256
 rawB = b * 256
 
-rawA * rawB = a * b * 256 * 256
+rawA * rawB = a * b * 256 * 256 // double 256 from both a and b
 ```
-But we want to store the result as `rawResult = (a * b) * 256`.
+But we want to store the result only as `rawResult = (a * b) * 256`. We have one too many `256`, hence:
 ```
 (rawA * rawB) / 256
 ```
@@ -2182,7 +2194,7 @@ Fixed& Fixed::operator++() {
 }
 ```
 1. Increment `_rawBits`
-2. Return the current object
+2. Return the current updated object (no copy needed)
 
 ## 🔸 Post-increment (i++)
 ```cpp
@@ -2195,7 +2207,7 @@ Fixed Fixed::operator++(int) {
 1. Copy the current value
 2. Increment `_rawBits`
 3. Return old value
-
+--- 
 # CPP03 ex00 - Aaaaand... OPEN!
 Ex00 is about managing state and understanding object behavior
 ## 🔸 ClapTrap State
@@ -2529,4 +2541,3 @@ Animal animal; // Error
 
 ### Notable Resources🔸
 - https://cplusplus.com/reference/cctype/
->>>>>>> c87750dcbebc2027423deebe69275f7650c6ec98
