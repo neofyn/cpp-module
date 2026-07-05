@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/05 22:51:00 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 23:34:18 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 
 /**
  * @class Animal
- * @brief Base class used to demonstrate runtime polymorphism.
+ * @brief Abstract base class for animal types.
  *
- * Animal stores a protected type string and exposes a virtual makeSound()
- * function. Because makeSound() is virtual, calling it through an Animal*
- * will execute the derived class version when the real object is a Dog or Cat.
+ * Animal stores a common type string and defines the shared interface for all
+ * derived animals. Because makeSound() is pure virtual, Animal cannot be
+ * instantiated directly. Only concrete derived classes such as Dog and Cat can
+ * be created.
  */
 class Animal
 {
@@ -33,14 +34,14 @@ public:
 	/**
 	 * @brief Default constructor.
 	 *
-	 * Initializes the animal type to a generic value.
+	 * Initializes the base Animal part of a derived object.
 	 */
 	Animal(void);
 
 	/**
 	 * @brief Copy constructor.
 	 *
-	 * Copies the type from another Animal.
+	 * Copies the base Animal part from another Animal object.
 	 *
 	 * @param other Animal object to copy from.
 	 */
@@ -49,8 +50,7 @@ public:
 	/**
 	 * @brief Copy assignment operator.
 	 *
-	 * Copies the type from another Animal if this object is not assigning
-	 * itself.
+	 * Copies the type string from another Animal object.
 	 *
 	 * @param other Animal object to assign from.
 	 * @return Reference to the current Animal object.
@@ -61,23 +61,25 @@ public:
 	 * @brief Virtual destructor.
 	 *
 	 * Must be virtual because Animal is used as a polymorphic base class.
-	 * This allows deleting Dog or Cat objects safely through Animal pointers.
+	 * This allows Dog and Cat destructors to run correctly when deleting
+	 * through an Animal pointer.
 	 */
 	virtual ~Animal(void);
 
 	/**
 	 * @brief Get the animal type.
 	 *
-	 * @return The type stored inside the Animal.
+	 * @return The type string stored in the Animal base part.
 	 */
 	std::string getType(void) const;
 
 	/**
-	 * @brief Print the generic animal sound.
+	 * @brief Pure virtual sound function.
 	 *
-	 * This function is virtual so derived classes can override it.
+	 * This makes Animal abstract. Every concrete derived class must implement
+	 * this function.
 	 */
-	virtual void makeSound(void) const;
+	virtual void makeSound(void) const = 0;
 };
 
 #endif
