@@ -1665,6 +1665,7 @@ Runs when an object is destroyed. Frees memory and cleans up resources.
 This means giving special behavior to operators like `+`, `<<`, `>>`, `==` etc.
 If we create a class, then try to use an operator, it gives an error because the compiler doesn't know what operators are supposed to do with an newly declared class.
 
+
 ## 🔸 Fixed-point Numbers
 A fixed-point number stores a decimal-like number inside an integer. For example, with **8 fractional bits**, the number is internally scaled by:
 ```cpp
@@ -1714,7 +1715,7 @@ Fixed c; // Default constructor
 c = b; // Copy assignment operator
 ```
 
-## 🔸 Maning Conventions
+## 🔸 Naming Conventions
 | Thing | Style | Example |
 |-------|-------|---------|
 | Class | UpperCamelCase | Fixed |
@@ -1734,13 +1735,13 @@ If we just return without the `&`, it would do this:
 3. That object is returned.
 4. temporary object destroyed.
 
-So when the function returns a referenced to the object, we would pair it with:
+So when the function returns a reference to the object, we would pair it with:
 ```cpp
 return *this
 ```
 The function would then do this:
-1. Operator= runs
-2. object updated
+1. `Operator=` runs
+2. Object updated
 3. return reference to object
 
 This also enables assignment chaining:
@@ -1850,6 +1851,169 @@ We use `<<` instead of `*`/multiplication because:
 - It's common in low-level programming
 - Historically it was faster than `*` (no performance gain today because modern compilers optimize this automatically)
 - It scales automatically with `_fractionalBits`
+
+## 🔸 Accuracy vs Precision
+### Accuracy
+How close you are to the real/intended value.
+```c
+Fixed c(42.42f);
+```
+The true value we want is `42.42`. But our fixed point class cannot store every possible decimal. It stores an integer raw value with **8 fractional bits**:
+```c
+scale = 2^8 = 256
+```
+
+So:
+```c
+42.42 * 256 = 10859.52
+```
+
+But `_rawBits` is an `int`, so it cannot store `10859.52`. With `roundf()`:
+```c
+roundf(10859.52) = 10860 // this is what we store
+```
+
+When converting back:
+```c
+10860 / 256 = 42.421875
+```
+
+Difference with the original value:
+```c
+42.421875 - 42.42 = 0.001875
+```
+
+So the value is **not exact**, but it is **quite close**.
+
+That closeness is **accuracy**.
+
+### Precision
+How small the steps are between representable values.
+```c
+static const int _fractionalBits = 8;
+```
+
+That means the smallest possible step is:
+```c
+1 / 256 = 0.00390625
+```
+
+So the `Fixed` class can represent values like:
+```c
+0
+0.00390625
+0.0078125
+0.01171875
+0.015625
+...
+```
+But it cannot represent every decimal between them.
+**More fractional bits** means **smaller steps**, therefore **more precision**.
+
+### Very important difference
+Imagine we want to store `42.42`. Our class stores:
+```c
+42.421875
+```
+This is **precise** in the sense that the class knows the value exactly as one of its allowed fixed-point steps.
+
+But it is **not perfectly accurate** because the intended value was 42.42.
+
+So:
+```c
+Stored value: 42.421875
+Precision:   step size is 1/256
+Accuracy:    error is 0.001875 away from 42.42
+```
+
+### Why `roundf()` is about accuracy
+Without roundf():
+```c
+42.42 * 256 = 10859.52
+```
+If we directly store it as an int, C++ truncates:
+```c
+10859.52 -> 10859 // automatically rounding up / removes the decimals
+```
+Then:
+```c
+10859 / 256 = 42.41796875
+```
+Error:
+```c
+42.42 - 42.41796875 = 0.00203125
+```
+With `roundf()`:
+```c
+10860 / 256 = 42.421875
+```
+Error:
+```c
+42.421875 - 42.42 = 0.001875
+```
+So `roundf()` gives the **nearest representable fixed-point value**. That makes the stored value more accurate.
+
+### Why _fractionalBits is about precision
+
+This line controls precision:
+```c
+static const int _fractionalBits = 8;
+```
+Because:
+```c
+precision step = 1 / 2 ^ _fractionalBits
+```
+For this project:
+```c
+1 / 2^8 = 1 / 256 = 0.00390625
+```
+If you had only 4 fractional bits:
+```c
+1 / 16 = 0.0625
+```
+Less precise.
+
+If you had 16 fractional bits:
+```c
+1 / 65536 = 0.0000152588
+```
+More precise.
+
+But there is a **tradeoff**: if you use more bits for decimals, you have fewer bits left for the whole-number part, so the range becomes smaller.
+
+### How this appears in ex02
+
+This output from ex02:
+```c
+0
+0.00390625
+0.00390625
+0.00390625
+0.0078125
+```
+comes from precision.
+
+When you do:
+```c
+++a;
+```
+you increase `_rawBits` by 1.
+
+Since:
+```c
+real value = rawBits / 256
+```
+then:
+```c
+1 raw step = 1 / 256 = 0.00390625
+```
+So `++a `does not add 1.0.
+
+It adds the `smallest representable amount`:
+```
+0.00390625
+```
+That is your `fixed-point precision`.
 
 ## 🔸 Increasing Precision
 With `_fractionalBits` is set to 8, we have
@@ -2207,7 +2371,7 @@ Fixed Fixed::operator++(int) {
 1. Copy the current value
 2. Increment `_rawBits`
 3. Return old value
---- 
+---
 # CPP03 ex00 - Aaaaand... OPEN!
 Ex00 is about managing state and understanding object behavior
 ## 🔸 ClapTrap State

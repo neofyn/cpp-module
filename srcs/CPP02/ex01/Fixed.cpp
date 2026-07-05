@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 13:54:19 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 14:44:40 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 19:14:01 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Fixed::Fixed(void) : _rawBits(0)
  * value = 10
  * rawBits = 10 * 256 = 2560
  */
-Fixed::Fixed(int const value)
+Fixed::Fixed(const int value)
 {
 	std::cout << "Int constructor called" << std::endl;
 	this->_rawBits = value << _fractionalBits;
@@ -40,14 +40,14 @@ Fixed::Fixed(int const value)
  * Example:
  * value = 42.42
  * rawBits = roundf(42.42 * 256)
- * 
+ *
  * Normally = 10859.52, and truncated to 10859 to be stored as int
- * roundf() gives a more accurate gied-point representation and 
+ * roundf() gives a more accurate gied-point representation and
  * correct rounding to 10860.
- * 
- *  
+ *
+ *
  */
-Fixed::Fixed(float const value)
+Fixed::Fixed(const float value)
 {
 	std::cout << "Float constructor called" << std::endl;
 	this->_rawBits = roundf(value * (1 << _fractionalBits));
@@ -58,7 +58,7 @@ Fixed::Fixed(float const value)
  *
  * Reuses the assignment operator so the copying logic stays in one place.
  */
-Fixed::Fixed(Fixed const &other)
+Fixed::Fixed(const Fixed &other)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = other;
@@ -67,7 +67,7 @@ Fixed::Fixed(Fixed const &other)
 /**
  * @brief Copy assignment operator.
  */
-Fixed &Fixed::operator=(Fixed const &other)
+Fixed &Fixed::operator=(const Fixed &other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
@@ -94,7 +94,7 @@ int Fixed::getRawBits(void) const
 /**
  * @brief Set the internal raw value.
  */
-void Fixed::setRawBits(int const raw)
+void Fixed::setRawBits(const int raw)
 {
 	this->_rawBits = raw;
 }
@@ -118,7 +118,7 @@ int Fixed::toInt(void) const
 /**
  * @brief Print Fixed as a float.
  */
-std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 {
 	out << fixed.toFloat();
 	return (out);

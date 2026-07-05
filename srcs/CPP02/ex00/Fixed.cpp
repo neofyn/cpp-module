@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 13:54:19 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 13:54:29 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 19:12:22 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ Fixed::Fixed(void) : _rawBits(0)
  *
  * @param other The Fixed object to copy.
  */
-Fixed::Fixed(Fixed const &other)
+Fixed::Fixed(const Fixed &other)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = other;
@@ -51,7 +51,7 @@ Fixed::Fixed(Fixed const &other)
  * @param other The Fixed object to assign from.
  * @return A reference to the current object.
  */
-Fixed &Fixed::operator=(Fixed const &other)
+Fixed &Fixed::operator=(const Fixed &other)
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &other)
@@ -85,7 +85,7 @@ int Fixed::getRawBits(void) const
  *
  * @param raw The new raw integer value.
  */
-void Fixed::setRawBits(int const raw)
+void Fixed::setRawBits(const int raw)
 {
 	this->_rawBits = raw;
 }

@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 13:57:46 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 14:45:48 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 19:10:50 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 int main(void)
 {
 	Fixed a;
-	Fixed const b(10);
-	Fixed const c(42.42f);
-	Fixed const d(b);
+	const Fixed b(10);
+	const Fixed c(42.42f);
+	const Fixed d(b);
 
 	a = Fixed(1234.4321f);
 

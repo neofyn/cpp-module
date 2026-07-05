@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/08 19:02:19 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 14:40:12 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 19:17:11 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ class Fixed
 		 *
 		 * @param value Integer value to convert.
 		 */
-		Fixed(int const value);
+		Fixed(const int value);
 
 		/**
 		 * @brief Float constructor.
@@ -55,7 +55,7 @@ class Fixed
 		 *
 		 * @param value Floating-point value to convert.
 		 */
-		Fixed(float const value);
+		Fixed(const float value);
 
 		/**
 		 * @brief Copy constructor.
@@ -64,7 +64,7 @@ class Fixed
 		 *
 		 * @param other Object to copy.
 		 */
-		Fixed(Fixed const &other);
+		Fixed(const Fixed &other);
 
 		/**
 		 * @brief Copy assignment operator.
@@ -74,7 +74,7 @@ class Fixed
 		 * @param other Object to copy from.
 		 * @return Reference to the current object.
 		 */
-		Fixed &operator=(Fixed const &other);
+		Fixed &operator=(const Fixed &other);
 
 		/**
 		 * @brief Destructor.
@@ -93,7 +93,7 @@ class Fixed
 		 *
 		 * @param raw New raw integer value.
 		 */
-		void setRawBits(int const raw);
+		void setRawBits(const int raw);
 
 		/**
 		 * @brief Convert the fixed-point value to float.
@@ -115,10 +115,14 @@ class Fixed
  *
  * Prints the Fixed object as a floating-point number.
  *
+ * Return as output stream to allow chaining.
+ * e.g.:
+ * 		std::cout << "a is " << a << std::endl;
+ *
  * @param out Output stream.
  * @param fixed Fixed object to print.
  * @return Reference to the output stream.
  */
-std::ostream &operator<<(std::ostream &out, Fixed const &fixed);
+std::ostream &operator<<(std::ostream &out, const Fixed &fixed);
 
 #endif
