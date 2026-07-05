@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:04 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:07:20 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 22:34:45 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ ClapTrap::ClapTrap(void)
  *
  * @param name The name assigned to the ClapTrap.
  */
-ClapTrap::ClapTrap(std::string const &name)
+ClapTrap::ClapTrap(const std::string &name)
 	: _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
 	std::cout << "ClapTrap name constructor called for "
@@ -54,7 +54,7 @@ ClapTrap::ClapTrap(std::string const &name)
  *
  * @param other The ClapTrap object to copy from.
  */
-ClapTrap::ClapTrap(ClapTrap const &other)
+ClapTrap::ClapTrap(const ClapTrap &other)
 	: _name(other._name),
 	  _hitPoints(other._hitPoints),
 	  _energyPoints(other._energyPoints),
@@ -85,7 +85,7 @@ ClapTrap::~ClapTrap(void)
  * @param other The ClapTrap object to copy from.
  * @return A reference to the current object.
  */
-ClapTrap &ClapTrap::operator=(ClapTrap const &other)
+ClapTrap &ClapTrap::operator=(const ClapTrap &other)
 {
 	if (this != &other)
 	{
@@ -107,7 +107,7 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &other)
  *
  * @param target The name of the target printed in the attack message.
  */
-void ClapTrap::attack(std::string const &target)
+void ClapTrap::attack(const std::string &target)
 {
 	if (this->_hitPoints == 0)
 	{

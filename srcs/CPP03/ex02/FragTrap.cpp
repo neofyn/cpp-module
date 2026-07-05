@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:21:57 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 22:36:20 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ FragTrap::FragTrap(void)
  *
  * @param name Name assigned to the FragTrap.
  */
-FragTrap::FragTrap(std::string const &name)
+FragTrap::FragTrap(const std::string &name)
 	: ClapTrap(name)
 {
 	this->_hitPoints = 100;
@@ -55,7 +55,7 @@ FragTrap::FragTrap(std::string const &name)
  *
  * @param other FragTrap object copied from.
  */
-FragTrap::FragTrap(FragTrap const &other)
+FragTrap::FragTrap(const FragTrap &other)
 	: ClapTrap(other)
 {
 	std::cout << "FragTrap copy constructor called for "
@@ -83,7 +83,7 @@ FragTrap::~FragTrap(void)
  * @param other FragTrap object assigned from.
  * @return Reference to the current object.
  */
-FragTrap &FragTrap::operator=(FragTrap const &other)
+FragTrap &FragTrap::operator=(const FragTrap &other)
 {
 	if (this != &other)
 		ClapTrap::operator=(other);

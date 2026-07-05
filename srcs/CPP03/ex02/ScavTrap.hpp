@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:13:39 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 22:37:30 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ public:
 	 *
 	 * @param name Name assigned to the ScavTrap.
 	 */
-	ScavTrap(std::string const &name);
+	ScavTrap(const std::string &name);
 
 	/**
 	 * @brief Copy constructor.
@@ -54,7 +54,7 @@ public:
 	 *
 	 * @param other ScavTrap object used as the copy source.
 	 */
-	ScavTrap(ScavTrap const &other);
+	ScavTrap(const ScavTrap &other);
 
 	/**
 	 * @brief Destructor.
@@ -72,7 +72,7 @@ public:
 	 * @param other ScavTrap object used as the assignment source.
 	 * @return Reference to the current object.
 	 */
-	ScavTrap &operator=(ScavTrap const &other);
+	ScavTrap &operator=(const ScavTrap &other);
 
 	/**
 	 * @brief ScavTrap-specific attack.
@@ -82,7 +82,7 @@ public:
 	 *
 	 * @param target Name of the target printed in the message.
 	 */
-	void attack(std::string const &target);
+	void attack(const std::string &target);
 
 	/**
 	 * @brief Activates Gate keeper mode.

@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:21:43 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 22:36:37 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ public:
 	 *
 	 * @param name Name assigned to the FragTrap.
 	 */
-	FragTrap(std::string const &name);
+	FragTrap(const std::string &name);
 
 	/**
 	 * @brief Copy constructor.
@@ -54,7 +54,7 @@ public:
 	 *
 	 * @param other FragTrap object used as the copy source.
 	 */
-	FragTrap(FragTrap const &other);
+	FragTrap(const FragTrap &other);
 
 	/**
 	 * @brief Destructor.
@@ -72,7 +72,7 @@ public:
 	 * @param other FragTrap object used as the assignment source.
 	 * @return Reference to the current object.
 	 */
-	FragTrap &operator=(FragTrap const &other);
+	FragTrap &operator=(const FragTrap &other);
 
 	/**
 	 * @brief Prints a positive high-five request.

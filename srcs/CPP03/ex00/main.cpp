@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:07:30 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 21:34:20 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main(void)
 		energyBot.attack("training dummy");
 
 	std::cout << std::endl;
+
 	std::cout << "--- Hit point exhaustion ---" << std::endl;
 	beta.takeDamage(100);
 	beta.attack("Alpha");
@@ -49,6 +50,7 @@ int main(void)
 	beta.takeDamage(1);
 
 	std::cout << std::endl;
+	
 	std::cout << "--- Orthodox Canonical Form tests ---" << std::endl;
 	ClapTrap copy(alpha);
 	ClapTrap assigned("Assigned");

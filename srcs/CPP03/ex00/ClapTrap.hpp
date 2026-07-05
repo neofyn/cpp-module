@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:05:28 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 22:35:09 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ public:
 	 *
 	 * @param name The name assigned to this ClapTrap.
 	 */
-	ClapTrap(std::string const &name);
+	ClapTrap(const std::string &name);
 
 	/**
 	 * @brief Copy constructor.
@@ -51,7 +51,7 @@ public:
 	 *
 	 * @param other The ClapTrap object to copy from.
 	 */
-	ClapTrap(ClapTrap const &other);
+	ClapTrap(const ClapTrap &other);
 
 	/**
 	 * @brief Destructor.
@@ -68,7 +68,7 @@ public:
 	 * @param other The ClapTrap object to copy from.
 	 * @return A reference to the current object.
 	 */
-	ClapTrap &operator=(ClapTrap const &other);
+	ClapTrap &operator=(const ClapTrap &other);
 
 	/**
 	 * @brief Attacks a target and spends one energy point.
@@ -78,7 +78,7 @@ public:
 	 *
 	 * @param target The name of the target printed in the attack message.
 	 */
-	void attack(std::string const &target);
+	void attack(const std::string &target);
 
 	/**
 	 * @brief Reduces the ClapTrap's hit points.

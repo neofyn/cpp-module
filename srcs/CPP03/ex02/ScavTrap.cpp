@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:13:52 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/05 22:37:04 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ ScavTrap::ScavTrap(void)
  *
  * @param name Name assigned to the ScavTrap.
  */
-ScavTrap::ScavTrap(std::string const &name)
+ScavTrap::ScavTrap(const std::string &name)
 	: ClapTrap(name)
 {
 	this->_hitPoints = 100;
@@ -55,7 +55,7 @@ ScavTrap::ScavTrap(std::string const &name)
  *
  * @param other ScavTrap object copied from.
  */
-ScavTrap::ScavTrap(ScavTrap const &other)
+ScavTrap::ScavTrap(const ScavTrap &other)
 	: ClapTrap(other)
 {
 	std::cout << "ScavTrap copy constructor called for "
@@ -83,7 +83,7 @@ ScavTrap::~ScavTrap(void)
  * @param other ScavTrap object assigned from.
  * @return Reference to the current object.
  */
-ScavTrap &ScavTrap::operator=(ScavTrap const &other)
+ScavTrap &ScavTrap::operator=(const ScavTrap &other)
 {
 	if (this != &other)
 		ClapTrap::operator=(other);
@@ -103,7 +103,7 @@ ScavTrap &ScavTrap::operator=(ScavTrap const &other)
  *
  * @param target Name of the target.
  */
-void ScavTrap::attack(std::string const &target)
+void ScavTrap::attack(const std::string &target)
 {
 	if (this->_hitPoints == 0)
 	{
