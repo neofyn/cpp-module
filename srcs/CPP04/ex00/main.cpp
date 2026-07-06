@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:36:26 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/06 22:13:26 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@
  */
 static void	testCorrectPolymorphism(void)
 {
+	std::cout << "\n=== Correct polymorphism test ===" << std::endl;
 	const Animal*	meta = new Animal();
 	const Animal*	dog = new Dog();
 	const Animal*	cat = new Cat();
-
-	std::cout << "\n=== Correct polymorphism test ===" << std::endl;
 
 	std::cout << dog->getType() << std::endl;
 	std::cout << cat->getType() << std::endl;
@@ -50,10 +49,9 @@ static void	testCorrectPolymorphism(void)
  */
 static void	testDirectObjects(void)
 {
+	std::cout << "\n=== Direct object test ===" << std::endl;
 	Dog	dog;
 	Cat	cat;
-
-	std::cout << "\n=== Direct object test ===" << std::endl;
 
 	std::cout << dog.getType() << std::endl;
 	dog.makeSound();
@@ -70,12 +68,11 @@ static void	testDirectObjects(void)
  */
 static void	testCopies(void)
 {
+	std::cout << "\n=== Copy test ===" << std::endl;
 	Dog	originalDog;
 	Dog	copiedDog(originalDog);
 	Cat	originalCat;
 	Cat	assignedCat;
-
-	std::cout << "\n=== Copy test ===" << std::endl;
 
 	assignedCat = originalCat;
 
@@ -95,11 +92,10 @@ static void	testCopies(void)
  */
 static void	testWrongPolymorphism(void)
 {
+	std::cout << "\n=== Wrong polymorphism test ===" << std::endl;
 	WrongAnimal	wrongAnimal;
 	WrongCat	wrongCat;
 	WrongAnimal*	wrongPointer = &wrongCat;
-
-	std::cout << "\n=== Wrong polymorphism test ===" << std::endl;
 
 	std::cout << wrongAnimal.getType() << std::endl;
 	wrongAnimal.makeSound();
