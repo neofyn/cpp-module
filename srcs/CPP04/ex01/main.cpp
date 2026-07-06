@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/04 19:41:20 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/06 22:33:10 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@
  */
 static void	testSubjectExample(void)
 {
+	std::cout << "\n=== Subject leak test ===" << std::endl;
 	const Animal* dog = new Dog();
 	const Animal* cat = new Cat();
-
-	std::cout << "\n=== Subject leak test ===" << std::endl;
 
 	dog->makeSound();
 	cat->makeSound();
@@ -44,9 +43,8 @@ static void	testSubjectExample(void)
  */
 static void	testAnimalArray(void)
 {
-	Animal*	animals[10];
-
 	std::cout << "\n=== Animal array test ===" << std::endl;
+	Animal*	animals[10];
 
 	for (int i = 0; i < 5; i++)
 		animals[i] = new Dog();

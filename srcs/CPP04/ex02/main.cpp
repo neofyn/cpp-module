@@ -6,7 +6,7 @@
 /*   By: fyudris <fyudris@student.42berlin.de>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/04 18:58:21 by fyudris           #+#    #+#             */
-/*   Updated: 2026/07/05 23:35:25 by fyudris          ###   ########.fr       */
+/*   Updated: 2026/07/06 22:42:49 by fyudris          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@
  */
 static void	testAbstractPolymorphism(void)
 {
+	std::cout << "\n=== Abstract polymorphism test ===" << std::endl;
 	const Animal* dog = new Dog();
 	const Animal* cat = new Cat();
-
-	std::cout << "\n=== Abstract polymorphism test ===" << std::endl;
 
 	std::cout << dog->getType() << std::endl;
 	std::cout << cat->getType() << std::endl;
@@ -48,9 +47,8 @@ static void	testAbstractPolymorphism(void)
  */
 static void	testAnimalArray(void)
 {
-	Animal* animals[10];
-
 	std::cout << "\n=== Animal array test ===" << std::endl;
+	Animal* animals[10];
 
 	for (int i = 0; i < 5; i++)
 		animals[i] = new Dog();
